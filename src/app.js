@@ -1,43 +1,57 @@
-import '../node_modules/bootstrap/dist/css/bootstrap-grid.css'
-import '../node_modules/material-design-icons/iconfont/material-icons.css'
+import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+import "../node_modules/material-design-icons/iconfont/material-icons.css";
 
-import '../assets/rules.css'
-import '../assets/app.css'
+import "../assets/rules.css";
+import "../assets/app.css";
 
-import Vue from '../node_modules/vue/dist/vue.common.js'
+import Vue from "../node_modules/vue/dist/vue.common.js";
 
-import SideMenu from './components/navigation/SideMenu.vue'
-import MainContent from './components/navigation/MainContent.vue'
-import HeadContent from './components/navigation/HeadContent.vue'
-import MenuContent from './components/navigation/MenuContent.vue'
-import OverlayContent from './components/navigation/OverlayContent.vue'
+import SideMenu from "./components/navigation/SideMenu.vue";
+import MainContent from "./components/navigation/MainContent.vue";
+import HeadContent from "./components/navigation/HeadContent.vue";
+import MenuContent from "./components/navigation/MenuContent.vue";
+import OverlayContent from "./components/navigation/OverlayContent.vue";
+import ActionContent from "./components/navigation/ActionContent.vue";
 
-import DashboardContent from './components/business/DashboardContent.vue'
-import MacroTagContent from './components/business/MacroTagContent.vue'
-import HardcodedTagContent from './components/business/HardcodedTagContent.vue'
-import VideoWrappedTagContent from './components/business/VideoWrappedTagContent.vue'
+import DashboardContent from "./components/business/DashboardContent.vue";
+import MacroTagContent from "./components/business/MacroTagContent.vue";
+import HardcodedTagContent from "./components/business/HardcodedTagContent.vue";
+import VideoWrappedTagContent from "./components/business/VideoWrappedTagContent.vue";
 
- new Vue({
-  el: '#app',
+new Vue({
+  el: "#app",
   components: {
-      SideMenu, 
-      MainContent, 
-      HeadContent,
-      MenuContent, 
-      OverlayContent,
-      DashboardContent,
-      MacroTagContent,
-      HardcodedTagContent,
-      VideoWrappedTagContent
+    SideMenu,
+    MainContent,
+    HeadContent,
+    MenuContent,
+    OverlayContent,
+    ActionContent,
+    DashboardContent,
+    MacroTagContent,
+    HardcodedTagContent,
+    VideoWrappedTagContent
   },
-  data:{
-      currentView: 'dashboard-content'
+  data: {
+    currentView: "dashboard-content",
+    window: {
+      width: 0,
+      height: 0,
+      heightReference:150
+    }
   },
+  created: function() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+
   methods: {
-      changeView:function(view){
-          debugger
-          this.currentView = view;
-      }
+    changeView: function(view) {
+      this.currentView = view;
+    },
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
   }
-  
-}) 
+});

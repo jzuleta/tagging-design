@@ -1,18 +1,18 @@
 .header-content {
-    height: 200px;    
-    position: fixed;
-    z-index: 2;    
+  height: 200px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
 }
 
-.navigation-content {    
-    width: 65px;
-    position: fixed;    
-    z-index: 2;    
+.navigation-content {
+  width: 65px;
+  position: fixed;
+  z-index: 2;
 }
 
 .main-content {
-    padding-left: 65px;
-    padding-top: 200px;
-    position: fixed;
+  padding-left: 65px;
+  position: fixed;
+  padding-top: 200px;
 }
-

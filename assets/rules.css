@@ -87,12 +87,16 @@ h4{  font-size: 20px;}
 .bg-light-blue{background-color: #1DA9F4}
 
 .font-size-small{ font-size: 12px}
-.font-size-long{ font-size: 14px}
+.font-size-normal{ font-size: 13px}
+.font-size-icon{font-size: 18px}
+.font-size-large{ font-size: 14px}
+
 .font-weight-light{ font-weight: 300}
 .font-weight-normal{ font-weight: 400}
 .font-weight-strong{ font-weight: 500}
 
 .font-color-light{ color: #9E9E9E;}
+.font-color-white{ color: #FFFFFF;}
 
 .border-0{ border: none;}
 .border-top{ border-top:thin solid rgb(212, 211, 211);}
@@ -101,4 +105,7 @@ h4{  font-size: 20px;}
 .border-left{ border-left:thin solid rgb(212, 211, 211);}
 
 .element-shadow{box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);}
+
+.button:focus{ outline: none;}
+.button:hover{ cursor: pointer;}
 
