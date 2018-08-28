@@ -16,7 +16,7 @@
                               <i class="material-icons font-color-white mr-8">delete</i>
                               Remove Selection
                         </button>
-                        <button class="button ml-8">
+                        <button class="button ml-8" @click="openAdServerSetup">
                               <i class="material-icons font-color-white mr-8">add</i>
                               Add Tag Configuration
                         </button>
@@ -29,6 +29,16 @@
             <slot></slot>
       </div>
 </template>
+<script>
+export default {
+        methods: {
+            openAdServerSetup: function() {                  
+                  this.$emit("adserver-setup", true);
+            }
+      }
+}
+</script>
+
 <style scoped>
 .action-content {
   margin-top: -120px;

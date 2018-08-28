@@ -17,6 +17,7 @@ import DashboardContent from "./components/business/DashboardContent.vue";
 import MacroTagContent from "./components/business/MacroTagContent.vue";
 import HardcodedTagContent from "./components/business/HardcodedTagContent.vue";
 import VideoWrappedTagContent from "./components/business/VideoWrappedTagContent.vue";
+import AdserverContent from "./components/business/AdserverContent.vue";
 
 new Vue({
   el: "#app",
@@ -27,6 +28,7 @@ new Vue({
     MenuContent,
     OverlayContent,
     ActionContent,
+    AdserverContent,
     DashboardContent,
     MacroTagContent,
     HardcodedTagContent,
@@ -34,6 +36,7 @@ new Vue({
   },
   data: {
     currentView: "dashboard-content",
+    adserverSetup: false,
     window: {
       width: 0,
       height: 0,
@@ -52,6 +55,9 @@ new Vue({
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
+    },
+    adserverSetupStatus: function(status){
+      this.adserverSetup = status;
     }
   }
 });

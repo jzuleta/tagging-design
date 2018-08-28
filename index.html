@@ -8,12 +8,13 @@
   </head>
   <body>
     <div id="app">
-        <overlay-content v-show="false"></overlay-content>        
+        <overlay-content v-show="adserverSetup"></overlay-content>   
+        <adserver-content v-show="adserverSetup"></adserver-content>     
         <menu-content></menu-content>
         <main-content>
             <head-content></head-content>
-            <side-menu @change-view="changeView"></side-menu>
-            <action-content>
+            <side-menu @change-view="changeView"></side-menu>            
+            <action-content @adserver-setup="adserverSetupStatus">
                 <component :is="currentView" :window-size="window"></component>
             </action-content>            
       </div>  

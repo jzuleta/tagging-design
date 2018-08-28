@@ -95,7 +95,7 @@ h4{  font-size: 20px;}
 .font-weight-normal{ font-weight: 400}
 .font-weight-strong{ font-weight: 500}
 
-.font-color-light{ color: #9E9E9E;}
+.font-color-light{ color: #7e7d7d;}
 .font-color-white{ color: #FFFFFF;}
 
 .border-0{ border: none;}
@@ -108,4 +108,15 @@ h4{  font-size: 20px;}
 
 .button:focus{ outline: none;}
 .button:hover{ cursor: pointer;}
+
+
+table {
+    border-collapse: collapse;
+}
+
+th{
+    text-align: left;
+    height: 45px;
+    border-bottom: thin solid #E0E0E0;
+}
 
