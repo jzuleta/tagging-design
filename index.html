@@ -10,9 +10,9 @@
         <overlay-content v-show="false"></overlay-content>
         <head-content></head-content>
         <menu-content></menu-content>
-        <main-content>     
-            <side-menu></side-menu>
-        </main-content>
+        <main-content>
+            <side-menu @change-view="changeView"></side-menu>
+            <component :is="currentView"></component>
       </div>  
   </body>
 </html>

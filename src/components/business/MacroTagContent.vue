@@ -1,3 +1,3 @@
 <template>
-      <div class="col-10">asdasd</div>
+      <div class="col-10">Macro</div>
 </template>

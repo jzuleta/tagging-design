@@ -12,6 +12,11 @@ import HeadContent from './components/navigation/HeadContent.vue'
 import MenuContent from './components/navigation/MenuContent.vue'
 import OverlayContent from './components/navigation/OverlayContent.vue'
 
+import DashboardContent from './components/business/DashboardContent.vue'
+import MacroTagContent from './components/business/MacroTagContent.vue'
+import HardcodedTagContent from './components/business/HardcodedTagContent.vue'
+import VideoWrappedTagContent from './components/business/VideoWrappedTagContent.vue'
+
  new Vue({
   el: '#app',
   components: {
@@ -19,6 +24,20 @@ import OverlayContent from './components/navigation/OverlayContent.vue'
       MainContent, 
       HeadContent,
       MenuContent, 
-      OverlayContent
+      OverlayContent,
+      DashboardContent,
+      MacroTagContent,
+      HardcodedTagContent,
+      VideoWrappedTagContent
+  },
+  data:{
+      currentView: 'dashboard-content'
+  },
+  methods: {
+      changeView:function(view){
+          debugger
+          this.currentView = view;
+      }
   }
+  
 }) 
