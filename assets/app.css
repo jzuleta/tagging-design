@@ -1,0 +1,18 @@
+.header-content {
+    height: 200px;    
+    position: fixed;
+    z-index: 2;    
+}
+
+.navigation-content {    
+    width: 65px;
+    position: fixed;    
+    z-index: 2;    
+}
+
+.main-content {
+    padding-left: 65px;
+    padding-top: 200px;
+    position: fixed;
+}
+
