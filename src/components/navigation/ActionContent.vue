@@ -57,7 +57,7 @@ button {
   align-items: center;
   color: white;
   background-color: transparent;
-  font-weight: 500;
+  font-size: 12px;
   transition: background-color .3s ease-in-out,border-right .3s ease-in-out
 }
 

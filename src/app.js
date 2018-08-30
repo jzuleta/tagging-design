@@ -1,8 +1,8 @@
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
 import "../node_modules/material-design-icons/iconfont/material-icons.css";
 
-import "../assets/rules.css";
-import "../assets/app.css";
+import "../assets/css/rules.css";
+import "../assets/css/app.css";
 
 import Vue from "../node_modules/vue/dist/vue.common.js";
 

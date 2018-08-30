@@ -1,0 +1,142 @@
+[
+    {
+      "FormattedName": "ad-form",
+      "Name": "Ad Form",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "amobee",
+      "Name": "Amobee",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "app-nexus",
+      "Name": "App Nexus",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "brightroll",
+      "Name": "Brightroll",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "conversant",
+      "Name": "Conversant",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "extreme-reach",
+      "Name": "Extreme Reach",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "freewheel",
+      "Name": "Freewheel",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "innovid",
+      "Name": "Innovid",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "jivox",
+      "Name": "Jivox",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "medialets",
+      "Name": "Medialet",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "openx",
+      "Name": "OpenX",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "platform161",
+      "Name": "Platform 161",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "smart-adserver",
+      "Name": "Smart Ad Server",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "the-trade-desk",
+      "Name": "The Trade Desk",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "true-x",
+      "Name": "True X",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": true
+    },
+    {
+      "FormattedName": "tube-mogul",
+      "Name": "Tube Mogul",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "videology",
+      "Name": "Videology",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "weborama",
+      "Name": "Weborama",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "yandex",
+      "Name": "Yandex",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    },
+    {
+      "FormattedName": "zismek",
+      "Name": "Zismek",
+      "TagTypes": ["Javascript", "Pixel"],
+      "Protocols": ["Standard", "Secure"],
+      "Favorite": false
+    }
+  ]
