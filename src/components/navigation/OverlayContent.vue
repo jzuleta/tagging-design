@@ -3,7 +3,7 @@
 </template>
 <style scoped>
 div{
-    opacity: .12;
+    opacity: .22;
     z-index: 3;
     position: fixed;
     background: black;

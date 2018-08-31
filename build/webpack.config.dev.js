@@ -34,13 +34,17 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
+      },
+      {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         use: [
           {
             loader: 'file-loader'
           }
         ]
-      }
+      }    
     ]
   },
   resolve: {

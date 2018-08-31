@@ -9,7 +9,7 @@
   <body>
     <div id="app">
         <overlay-content v-show="adserverSetup"></overlay-content>   
-        <adserver-content v-show="adserverSetup"></adserver-content>     
+        <adserver-content v-show="adserverSetup" :window-size="window"></adserver-content>     
         <menu-content></menu-content>
         <main-content>
             <head-content></head-content>

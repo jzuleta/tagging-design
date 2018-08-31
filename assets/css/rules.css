@@ -77,9 +77,9 @@ h4{  font-size: 20px;}
 .rounded-left{ border-top-left-radius: 3px; border-bottom-left-radius: 3px }
 .rounded-rigth{ border-top-right-radius: 3px; border-bottom-right-radius: 3px }
 
-.floar-left{float: left;}
+.float-left{float: left !important;}
 
-.floar-rigth{float: rigth;}
+.float-rigth{float: rigth !important;}
 
 .bg-gray-light{ background-color: rgba(250,250,250,1);}
 .bg-gray-normal{ background-color:  rgba(245,245,245,1); }

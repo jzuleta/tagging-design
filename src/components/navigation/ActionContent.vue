@@ -8,11 +8,11 @@
                         </button>
                   </div>
                   <div class="d-flex align-items-center action-section">                        
-                        <button class="button">
+                        <button class="button" v-show="false">
                               <i class="material-icons font-color-white mr-8">attachment</i>
                               File Management
                         </button>
-                        <button class="button ml-8">
+                        <button class="button ml-8" v-show="false">
                               <i class="material-icons font-color-white mr-8">delete</i>
                               Remove Selection
                         </button>
