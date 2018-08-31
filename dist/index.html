@@ -2,12 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Tagging [Redesign]</title>
   </head>
   <body>
     <div id="app">
-      
-    </div>  
+        <overlay-content v-show="adserverSetup"></overlay-content>   
+        <adserver-content v-show="adserverSetup" :window-size="window"></adserver-content>     
+        <menu-content></menu-content>
+        <main-content>
+            <head-content></head-content>
+            <side-menu @change-view="changeView"></side-menu>            
+            <action-content @adserver-setup="adserverSetupStatus">
+                <component :is="currentView" :window-size="window"></component>
+            </action-content>            
+      </div>  
   <script type="text/javascript" src="main.js"></script></body>
 </html>

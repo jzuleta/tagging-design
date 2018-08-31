@@ -12,6 +12,7 @@ import HeadContent from "./components/navigation/HeadContent.vue";
 import MenuContent from "./components/navigation/MenuContent.vue";
 import OverlayContent from "./components/navigation/OverlayContent.vue";
 import ActionContent from "./components/navigation/ActionContent.vue";
+import ConfigurationContent from "./components/navigation/ConfigurationContent.vue"
 
 import DashboardContent from "./components/business/DashboardContent.vue";
 import MacroTagContent from "./components/business/MacroTagContent.vue";
@@ -28,6 +29,7 @@ new Vue({
     MenuContent,
     OverlayContent,
     ActionContent,
+    ConfigurationContent,    
     AdserverContent,
     DashboardContent,
     MacroTagContent,
