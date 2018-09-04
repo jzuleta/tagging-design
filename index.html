@@ -9,8 +9,8 @@
   <body>
     <div id="app">
         <overlay-content v-show="adserverSetup"></overlay-content>   
-        <configuration-content v-show="adserverSetup" :window-size="window">
-          <adserver-content :window-size="window"></adserver-content>     
+        <configuration-content v-show="adserverSetup" :window-size="window">          
+          <component :is="'basic-adserver-configuration'" :window-size="window" :data-type="dataType"></component> 
         </configuration-content>        
         <menu-content></menu-content>
         

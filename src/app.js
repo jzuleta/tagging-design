@@ -5,6 +5,7 @@ import "../assets/css/rules.css";
 import "../assets/css/app.css";
 
 import Vue from "../node_modules/vue/dist/vue.common.js";
+import axios from "axios";
 
 import SideMenu from "./components/navigation/SideMenu.vue";
 import MainContent from "./components/navigation/MainContent.vue";
@@ -19,6 +20,7 @@ import MacroTagContent from "./components/business/MacroTagContent.vue";
 import HardcodedTagContent from "./components/business/HardcodedTagContent.vue";
 import VideoWrappedTagContent from "./components/business/VideoWrappedTagContent.vue";
 import AdserverContent from "./components/business/AdserverContent.vue";
+import BasicAdserverConfiguration from "./components/business/BasicAdserverConfiguration.vue";
 
 new Vue({
   el: "#app",
@@ -29,16 +31,23 @@ new Vue({
     MenuContent,
     OverlayContent,
     ActionContent,
-    ConfigurationContent,    
+    ConfigurationContent,
+    BasicAdserverConfiguration, 
     AdserverContent,
     DashboardContent,
     MacroTagContent,
     HardcodedTagContent,
     VideoWrappedTagContent
   },
+  beforeCreate: function() {
+    axios.get("/assets/data/data-type.json").then(response => {
+      this.dataType = response.data;
+    });
+  },
   data: {
     currentView: "dashboard-content",
     adserverSetup: false,
+    dataType: [],
     window: {
       width: 0,
       height: 0,
