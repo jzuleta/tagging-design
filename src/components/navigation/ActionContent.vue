@@ -2,26 +2,26 @@
       <div class="col-10 p-0 pr-24 action-content">
             <div class="d-flex justify-content-between">
                   <div class="d-flex align-items-center action-section">                                                
-                        <button class="button">
-                              <i class="material-icons font-color-white mr-8">check_box_outline_blank</i>
+                        <button class="mdc-button">
+                              <i class="material-icons mdc-button__icon">check_box_outline_blank</i>
                               Select All
                         </button>
                   </div>
                   <div class="d-flex align-items-center action-section">                        
-                        <button class="button" v-show="false">
-                              <i class="material-icons font-color-white mr-8">attachment</i>
+                        <button class="mdc-button" v-show="false">
+                              <i class="material-icons mdc-button__icon">attachment</i>
                               File Management
                         </button>
-                        <button class="button ml-8" v-show="false">
-                              <i class="material-icons font-color-white mr-8">delete</i>
+                        <button class="mdc-button" v-show="false">
+                              <i class="material-icons mdc-button__icon">delete</i>
                               Remove Selection
                         </button>
-                        <button class="button ml-8" @click="openAdServerSetup">
-                              <i class="material-icons font-color-white mr-8">add</i>
+                        <button class="mdc-button" @click="openAdServerSetup">
+                              <i class="material-icons mdc-button__icon">add</i>
                               Add Tag Configuration
                         </button>
-                        <button class="button ml-8">
-                               <i class="material-icons font-color-white mr-8">done</i>
+                        <button class="mdc-button">
+                               <i class="material-icons mdc-button__icon">done</i>
                               Submit Request
                         </button>
                   </div>
@@ -30,7 +30,8 @@
       </div>
 </template>
 <script>
-export default {
+
+export default {      
         methods: {
             openAdServerSetup: function() {                  
                   this.$emit("adserver-setup", true);
@@ -48,19 +49,4 @@ export default {
   height: 50px;
 }
 
-button {
-  padding: 5px 8px;
-  border: none;
-  border-radius: 2px;
-  letter-spacing: 0.3px;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  font-size: 12px;
-  transition: background-color .3s ease-in-out,border-right .3s ease-in-out
-}
-
-button:hover{
-      background-color: #2196f3bf;
-}
 </style>

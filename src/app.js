@@ -4,6 +4,9 @@ import "../node_modules/material-design-icons/iconfont/material-icons.css";
 import "../assets/css/rules.css";
 import "../assets/css/app.css";
 
+import "../node_modules/@material/button/dist/mdc.button.css";
+import "../node_modules/@material/checkbox/dist/mdc.checkbox.css";
+
 import Vue from "../node_modules/vue/dist/vue.common.js";
 import axios from "axios";
 
@@ -21,6 +24,7 @@ import HardcodedTagContent from "./components/business/HardcodedTagContent.vue";
 import VideoWrappedTagContent from "./components/business/VideoWrappedTagContent.vue";
 import AdserverContent from "./components/business/AdserverContent.vue";
 import BasicAdserverConfiguration from "./components/business/BasicAdserverConfiguration.vue";
+
 
 new Vue({
   el: "#app",
