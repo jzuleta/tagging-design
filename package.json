@@ -9,7 +9,6 @@
   },
   "author": "Jairo Zuleta Gutierrez",
   "devDependencies": {
-    "@material/ripple": "^0.39.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
@@ -25,13 +24,12 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "@material/button": "^0.39.1",
-    "@material/checkbox": "^0.39.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "express": "^4.16.3",
     "material-design-icons": "^3.0.1",
     "vue": "^2.5.17",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-multiselect": "^2.1.0"
   }
 }

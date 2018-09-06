@@ -1,92 +1,86 @@
 {
-    "TagTypes" : [
-        {
+    "TagTypes": {
+        "Name": "Tag Types",
+        "Data": [{
             "id": 1,
             "Name": "Javascript"
-        },
-        {
+        }, {
             "id": 2,
             "Name": "Pixel"
-        },
-        {
+        }, {
             "id": 3,
             "Name": "comScore Script"
-        }
-    ],
-    "ProtocolTypes":[
-        {
+        }]
+    },
+    "ProtocolTypes": {
+        "Name": "Protocols",
+        "Data": [{
             "id": 1,
             "Name": "Standard"
-        },
-        {
+        }, {
             "id": 2,
             "Name": "Secure"
-        },
-        {
+        }, {
             "id": 3,
             "Name": "Default Protocol"
-        }
-    ],
-    "Preferences":[
-        {
+        }]
+    },
+    "Preferences": {
+        "Name": "Preferences",
+        "Data": [{
             "id": 1,
             "Name": "ILR"
-        },
-        {
+        }, {
             "id": 2,
             "Name": "No Flash"
-        },
-        {
+        }, {
             "id": 3,
             "Name": "No Block"
-        },
-        {
+        }, {
             "id": 4,
             "Name": "Special Content"
-        }
-    ],
-    "Others":[
-        {
+        }]
+    },
+    "Others": {
+        "Name": "Others",
+        "Data": [{
             "id": 1,
             "Name": "Bit 0 7"
-        },
-        {
+        }, {
             "id": 2,
             "Name": "Bit 16 23"
-        }
-    ],
-    "MediType":[
-        {
+        }]
+    },
+    "MediaType": {
+        "Name": "Media Types",
+        "Data": [{
             "id": 1,
             "Name": "Flash Document"
-        },
-        {
+        }, {
             "id": 2,
             "Name": "Video Web"
-        },
-        {
+        }, {
             "id": 3,
             "Name": "Zip File"
-        },
-        {
+        }, {
             "id": 4,
             "Name": "Audio File"
-        },
-        {
+        }, {
             "id": 5,
             "Name": "Simple Document"
-        },
-        {
+        }, {
             "id": 6,
             "Name": "JSON Format"
-        },
-        {
+        }, {
             "id": 7,
             "Name": "Open Document"
-        },
-        {
+        }, {
             "id": 8,
             "Name": "JPEG Image"
-        }
-    ]
+        }]
+    },
+    "__ob__": {
+        "Name": "__ob__",
+        "Data": []
+    }
 }

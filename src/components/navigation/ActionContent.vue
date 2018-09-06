@@ -1,29 +1,22 @@
 <template>
       <div class="col-10 p-0 pr-24 action-content">
             <div class="d-flex justify-content-between">
-                  <div class="d-flex align-items-center action-section">                                                
-                        <button class="mdc-button">
-                              <i class="material-icons mdc-button__icon">check_box_outline_blank</i>
-                              Select All
-                        </button>
+                  <div class="d-flex align-items-center action-section">       
+                        <md-checkbox>Select All</md-checkbox>                                         
                   </div>
                   <div class="d-flex align-items-center action-section">                        
-                        <button class="mdc-button" v-show="false">
-                              <i class="material-icons mdc-button__icon">attachment</i>
+                        <md-button class="mdc-button" v-show="false">                              
                               File Management
-                        </button>
-                        <button class="mdc-button" v-show="false">
-                              <i class="material-icons mdc-button__icon">delete</i>
+                        </md-button>
+                        <md-button class="mdc-button" v-show="false">                              
                               Remove Selection
-                        </button>
-                        <button class="mdc-button" @click="openAdServerSetup">
-                              <i class="material-icons mdc-button__icon">add</i>
+                        </md-button>
+                        <md-button class="mdc-button" @click="openAdServerSetup">                              
                               Add Tag Configuration
-                        </button>
-                        <button class="mdc-button">
-                               <i class="material-icons mdc-button__icon">done</i>
+                        </md-button>
+                        <md-button class="mdc-button">                               
                               Submit Request
-                        </button>
+                        </md-button>
                   </div>
             </div>
             <slot></slot>
@@ -31,7 +24,7 @@
 </template>
 <script>
 
-export default {      
+export default {   
         methods: {
             openAdServerSetup: function() {                  
                   this.$emit("adserver-setup", true);

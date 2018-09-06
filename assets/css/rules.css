@@ -66,13 +66,13 @@ h4{  font-size: 20px;}
 .ml-18{margin-left: 18px}
 .ml-24{margin-left: 24px}
 
-.mx-8{margin-right: 8px; margin-left: 8px ;}
-.mx-18{margin-right: 18px; margin-left: 18px ;}
-.mx-24{margin-right: 24px; margin-left: 24px ;}
+.mx-8{margin-right: 8px !important; margin-left: 8px !important ;}
+.mx-18{margin-right: 18px !important; margin-left: 18px !important ;}
+.mx-24{margin-right: 24px !important; margin-left: 24px !important ;}
 
-.my-8{margin-top: 8px; margin-bottom: 8px;}
-.my-18{margin-top: 18px; margin-bottom: 18px;}
-.my-24{margin-top: 24px; margin-bottom: 24px;}
+.my-8{margin-top: 8px !important; margin-bottom: 8px !important;}
+.my-18{margin-top: 18px !important; margin-bottom: 18px !important;}
+.my-24{margin-top: 24px !important; margin-bottom: 24px !important;}
 
 .rounded{ border-radius: 3xp; }
 

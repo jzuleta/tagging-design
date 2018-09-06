@@ -1,11 +1,10 @@
-import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
-import "../node_modules/material-design-icons/iconfont/material-icons.css";
+import "bootstrap/dist/css/bootstrap-grid.css";
+import "material-design-icons/iconfont/material-icons.css";
 
 import "../assets/css/rules.css";
 import "../assets/css/app.css";
 
-import "../node_modules/@material/button/dist/mdc.button.css";
-import "../node_modules/@material/checkbox/dist/mdc.checkbox.css";
+import 'vue-material/dist/vue-material.min.css'
 
 import Vue from "../node_modules/vue/dist/vue.common.js";
 import axios from "axios";
@@ -25,6 +24,12 @@ import VideoWrappedTagContent from "./components/business/VideoWrappedTagContent
 import AdserverContent from "./components/business/AdserverContent.vue";
 import BasicAdserverConfiguration from "./components/business/BasicAdserverConfiguration.vue";
 
+
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(VueMaterial)
 
 new Vue({
   el: "#app",
@@ -51,7 +56,7 @@ new Vue({
   data: {
     currentView: "dashboard-content",
     adserverSetup: false,
-    dataType: [],
+    dataType: null,
     window: {
       width: 0,
       height: 0,
