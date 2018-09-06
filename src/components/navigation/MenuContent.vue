@@ -1,3 +1,3 @@
 <template>
-    <div class="navigation-content element-shadow bg-gray-light h-100"></div>
+    <div class="navigation-content element-shadow bg-gray-dark h-100"></div>
 </template>

@@ -7,48 +7,48 @@
     <div  :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto">
         <div class="d-flex justify-content-between px-18">
             <div class="w-50">
-                <div class="pt-18 font-size-large">Tag Type</div>
+                <div class="pt-18 font-size-small font-color-light">Tag Type</div>
                 <div v-for="(tagType, index) in dataType.TagTypes" 
                     class="d-flex align-items-center justify-content-star mt-8">
                     <input type="checkbox" :id="tagType.Name +'-chk'"/>
-                    <label :for="tagType.Name +'-chk'" class="ml-24">{{tagType.Name}}</label>
+                    <label :for="tagType.Name +'-chk'" class="ml-24 font-weight-strong">{{tagType.Name}}</label>
                 </div>                
             </div>
             <div class="w-50">
-                <div class="pt-18 font-size-large">Protocol</div>
+                <div class="pt-18 font-size-small font-color-light">Protocol</div>
                 <div v-for="(protocolType, index) in dataType.ProtocolTypes" 
                     class="d-flex align-items-center justify-content-star mt-8">
                     <input type="checkbox" :id="protocolType.Name +'-chk'"/>
-                    <label :for="protocolType.Name +'-chk'" class="ml-24">{{protocolType.Name}}</label>
+                    <label :for="protocolType.Name +'-chk'" class="ml-24 font-weight-strong">{{protocolType.Name}}</label>
                 </div>                
             </div>
         </div>
         <div class="d-flex justify-content-between mt-18 border-top px-18">
             <div class="w-50">
-                <div class="pt-18 font-size-large">Preferences</div>
+                <div class="pt-18 font-size-small font-color-light">Preferences</div>
                 <div v-for="(preference, index) in dataType.Preferences" 
                     class="d-flex align-items-center justify-content-star mt-8">
                     <input type="checkbox" :id="preference.Name +'-chk'"/>
-                    <label :for="preference.Name +'-chk'" class="ml-24">{{preference.Name}}</label>
+                    <label :for="preference.Name +'-chk'" class="ml-24 font-weight-strong">{{preference.Name}}</label>
                 </div>                
             </div>
             <div class="w-50">
-                <div class="pt-18 font-size-large">Others</div>
+                <div class="pt-18 font-size-small font-color-light">Others</div>
                 <div v-for="(other, index) in dataType.Others" 
                     class="d-flex align-items-center justify-content-star mt-8">
                     <input type="checkbox" :id="other.Name +'-chk'"/>
-                    <label :for="other.Name +'-chk'" class="ml-24">{{other.Name}}</label>
+                    <label :for="other.Name +'-chk'" class="ml-24 font-weight-strong">{{other.Name}}</label>
                 </div>                
             </div>
         </div>
         <div class="mt-18 border-top px-18">
-            <div class="pt-18 font-size-large">Media Type</div>
+            <div class="pt-18 font-size-small font-color-light">Media Type</div>
             <div class="d-flex justify-content-between ">
             <div class="w-50" v-for="(mediaTypeSection, mdIndex) in formatMediaType()">                
                 <div v-for="(mediaType, index) in mediaTypeSection" 
                     class="d-flex align-items-center justify-content-star mt-8">
                     <input type="checkbox" :id="mediaType.Name +'-chk'"/>
-                    <label :for="mediaType.Name +'-chk'" class="ml-24">{{mediaType.Name}}</label>
+                    <label :for="mediaType.Name +'-chk'" class="ml-24 font-weight-strong">{{mediaType.Name}}</label>
                 </div>                
             </div>
             </div>

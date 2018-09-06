@@ -55,7 +55,6 @@ button {
   letter-spacing: 0.3px;
   display: flex;
   align-items: center;
-  color: white;
   background-color: transparent;
   font-size: 12px;
   transition: background-color .3s ease-in-out,border-right .3s ease-in-out
