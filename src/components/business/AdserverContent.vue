@@ -1,91 +1,98 @@
 <template>
-    <div>
-        <div class="ad-server-header d-flex align-items-center border-bottom  px-18">
-            <i class="material-icons font-color-light mr-18" v-show="!isSearching">close</i>
-            <h4 class="font-weight-strong w-100" v-show="!isSearching">Select an Ad Server</h4>
-            <md-field md-inline v-show="isSearching" ref="input-search">
-                <label>Ad server name</label>
-                <md-input v-model="searchInput"></md-input>
-            </md-field>
-            <i class="material-icons font-color-light ml-auto ml-18" v-show="!isSearching" @click="setSearchStatus(true)">search</i>
-            <i class="material-icons font-color-light ml-18" v-show="isSearching" @click="setSearchStatus(false)">close</i>
-        </div>
-        <div class="pl-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto" v-show="isSearching">
-            <md-empty-state v-show="filteredAdServers.length == 0"
-                    md-icon="filter_none"
-                    md-description="There are no coincidences"></md-empty-state>
-            <ul>
-                <li v-for="adServerObj in filteredAdServers" :key="adServerObj.FormattedName"
-                    class="d-flex justify-content-start">
-                    <div :class="adServerObj.FormattedName + '-logo'"
-                        class="ad-server-logo-content"></div>
-                    <div class="pt-8 ad-server-content border-bottom">
-                        <div class="d-flex">
-                            <span class="font-weight-strong">{{adServerObj.Name}}</span>
-                            <div class="ml-auto">
-                                <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
-                                  class="protocol-content font-size-small mr-8"
-                                  :class="protocolObj.toLowerCase() + '-status'">
-                                {{protocolObj}}
-                            </span>
-                            </div>
-                        </div>
-                        <div class="font-size-small font-color-light ad-server-tag">
-                            {{getCommaFormat(adServerObj.TagTypes)}}
-                            </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="pl-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto" v-show="!isSearching">
-            <div class="pt-18 font-size-large">Recent</div>
-            <ul>
-                <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
-                    class="d-flex justify-content-start">
-                    <div :class="adServerObj.FormattedName + '-logo'"
-                        class="ad-server-logo-content"></div>
-                    <div class="pt-8 ad-server-content border-bottom">
-                        <div class="d-flex">
-                            <span class="font-weight-strong">{{adServerObj.Name}}</span>
-                            <div class="ml-auto">
-                                <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
-                                  class="protocol-content font-size-small mr-8"
-                                  :class="protocolObj.toLowerCase() + '-status'">
-                                {{protocolObj}}
-                            </span>
-                            </div>
-                        </div>
-                        <div class="font-size-small font-color-light ad-server-tag">
-                            {{getCommaFormat(adServerObj.TagTypes)}}
-                            </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="pt-18 font-size-large">More</div>
-            <ul>
-                <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
-                    class="d-flex justify-content-start">
-                    <div :class="adServerObj.FormattedName + '-logo'"
-                        class="ad-server-logo-content"></div>
-                    <div class="pt-8 ad-server-content border-bottom">
-                        <div class="d-flex">
-                            <span class="font-weight-strong">{{adServerObj.Name}}</span>
-                            <div class="ml-auto">
-                                <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
-                                  class="protocol-content font-size-small mr-8"
-                                  :class="protocolObj.toLowerCase() + '-status'">
-                                {{protocolObj}}
-                            </span>
-                            </div>
-                        </div>
-                        <div class="font-size-small font-color-light ad-server-tag">
-                            {{getCommaFormat(adServerObj.TagTypes)}}
-                            </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+<div>
+    <div class="ad-server-header d-flex align-items-center border-bottom">
+        <md-button class="md-icon-button" v-show="!isSearching">
+            <md-icon>close</md-icon>
+        </md-button>
+        <h4 class="font-weight-strong w-100" v-show="!isSearching">Select an Ad Server</h4>
+        <md-field md-inline v-show="isSearching" class="mx-18">
+            <label>Ad server name</label>
+            <md-input v-model="searchInput"></md-input>
+        </md-field>
+        <md-button class="md-icon-button ml-auto" v-show="!isSearching" @click="setSearchStatus(true)">
+            <md-icon>search</md-icon>
+        </md-button>
+        <md-button class="md-icon-button ml-auto" v-show="isSearching" @click="setSearchStatus(false)">
+            <md-icon>close</md-icon>
+        </md-button>
     </div>
+    <div class="pl-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto" :class="{'d-flex': isSearching}" v-show="isSearching">
+        <md-empty-state v-show="filteredAdServers.length == 0"
+                    md-icon="filter_none"
+                    md-description="There are no coincidences">
+        </md-empty-state>
+        <ul>
+            <li v-for="adServerObj in filteredAdServers" :key="adServerObj.FormattedName"
+                    class="d-flex justify-content-start">
+                <div :class="adServerObj.FormattedName + '-logo'"
+                        class="ad-server-logo-content"></div>
+                <div class="pt-8 ad-server-content border-bottom">
+                    <div class="d-flex">
+                        <span class="font-weight-strong">{{adServerObj.Name}}</span>
+                        <div class="ml-auto">
+                            <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
+                                  class="protocol-content font-size-small mr-8"
+                                  :class="protocolObj.toLowerCase() + '-status'">
+                                {{protocolObj}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="font-size-small font-color-light ad-server-tag">
+                      {{getCommaFormat(adServerObj.TagTypes)}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="pl-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto" v-show="!isSearching">
+        <div class="pt-18 font-size-large">Recent</div>
+        <ul>
+            <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
+                    class="d-flex justify-content-start">
+                <div :class="adServerObj.FormattedName + '-logo'"
+                        class="ad-server-logo-content"></div>
+                <div class="pt-8 ad-server-content border-bottom">
+                    <div class="d-flex">
+                        <span class="font-weight-strong">{{adServerObj.Name}}</span>
+                        <div class="ml-auto">
+                            <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
+                                  class="protocol-content font-size-small mr-8"
+                                  :class="protocolObj.toLowerCase() + '-status'">
+                                {{protocolObj}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="font-size-small font-color-light ad-server-tag">
+                      {{getCommaFormat(adServerObj.TagTypes)}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="pt-18 font-size-large">More</div>
+        <ul>
+            <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
+                    class="d-flex justify-content-start">
+                <div :class="adServerObj.FormattedName + '-logo'"
+                        class="ad-server-logo-content"></div>
+                <div class="pt-8 ad-server-content border-bottom">
+                    <div class="d-flex">
+                        <span class="font-weight-strong">{{adServerObj.Name}}</span>
+                        <div class="ml-auto">
+                            <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
+                                  class="protocol-content font-size-small mr-8"
+                                  :class="protocolObj.toLowerCase() + '-status'">
+                                {{protocolObj}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="font-size-small font-color-light ad-server-tag">
+                      {{getCommaFormat(adServerObj.TagTypes)}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 </template>
 <style scoped>
 .ad-server-header {
@@ -125,6 +132,10 @@ ul {
 .secure-status {
   background-color: #0f9d58;
   color: white;
+}
+
+.md-empty-state{
+  transition: none;
 }
 </style>
 <script>
