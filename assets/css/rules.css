@@ -49,6 +49,7 @@ h4{  font-size: 20px;}
 
 .m-0{margin: -1px 0px}
 
+.mt-auto{margin-top: auto;}
 .mt-8{margin-top: 8px}
 .mt-18{margin-top: 18px}
 .mt-24{margin-top: 24px}
@@ -81,7 +82,7 @@ h4{  font-size: 20px;}
 
 .float-left{float: left !important;}
 
-.float-rigth{float: rigth !important;}
+.float-right{float: rigth !important;}
 
 .bg-gray-light{ background-color: #F5F5F6;}
 .bg-gray-normal{ background-color:  #cfcfcf; }

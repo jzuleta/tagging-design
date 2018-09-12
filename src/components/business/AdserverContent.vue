@@ -1,23 +1,54 @@
 <template>
     <div>
         <div class="ad-server-header d-flex align-items-center border-bottom  px-18">
-            <i class="material-icons font-color-light mr-18">close</i>
-            <h4 class="font-weight-strong">Select an Ad Server</h4>
-            <i class="material-icons font-color-light ml-auto">search</i>
-        </div>        
-        <div class=" px-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto">
-            <div class="pt-18 font-size-large">Recent</div>
+            <i class="material-icons font-color-light mr-18" v-show="!isSearching">close</i>
+            <h4 class="font-weight-strong w-100" v-show="!isSearching">Select an Ad Server</h4>
+            <md-field md-inline v-show="isSearching" ref="input-search">
+                <label>Ad server name</label>
+                <md-input v-model="searchInput"></md-input>
+            </md-field>
+            <i class="material-icons font-color-light ml-auto ml-18" v-show="!isSearching" @click="setSearchStatus(true)">search</i>
+            <i class="material-icons font-color-light ml-18" v-show="isSearching" @click="setSearchStatus(false)">close</i>
+        </div>
+        <div class="pl-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto" v-show="isSearching">
+            <md-empty-state v-show="filteredAdServers.length == 0"
+                    md-icon="filter_none"
+                    md-description="There are no coincidences"></md-empty-state>
             <ul>
-                <li v-for="(adServerObj, adServerIndex) in getAdServerPreference(true)"
+                <li v-for="adServerObj in filteredAdServers" :key="adServerObj.FormattedName"
                     class="d-flex justify-content-start">
-                   <div :class="adServerObj.FormattedName + '-logo'"
-                        class="ad-server-logo-content">
-                    </div>
+                    <div :class="adServerObj.FormattedName + '-logo'"
+                        class="ad-server-logo-content"></div>
                     <div class="pt-8 ad-server-content border-bottom">
                         <div class="d-flex">
                             <span class="font-weight-strong">{{adServerObj.Name}}</span>
                             <div class="ml-auto">
-                            <span v-for="(protocolObj, rotocolIndex) in adServerObj.Protocols"
+                                <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
+                                  class="protocol-content font-size-small mr-8"
+                                  :class="protocolObj.toLowerCase() + '-status'">
+                                {{protocolObj}}
+                            </span>
+                            </div>
+                        </div>
+                        <div class="font-size-small font-color-light ad-server-tag">
+                            {{getCommaFormat(adServerObj.TagTypes)}}
+                            </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="pl-18" :style="'height:' + (windowSize.height - 60) + 'px'" style="overflow:auto" v-show="!isSearching">
+            <div class="pt-18 font-size-large">Recent</div>
+            <ul>
+                <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
+                    class="d-flex justify-content-start">
+                    <div :class="adServerObj.FormattedName + '-logo'"
+                        class="ad-server-logo-content"></div>
+                    <div class="pt-8 ad-server-content border-bottom">
+                        <div class="d-flex">
+                            <span class="font-weight-strong">{{adServerObj.Name}}</span>
+                            <div class="ml-auto">
+                                <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
                                   class="protocol-content font-size-small mr-8"
                                   :class="protocolObj.toLowerCase() + '-status'">
                                 {{protocolObj}}
@@ -31,17 +62,16 @@
                 </li>
             </ul>
             <div class="pt-18 font-size-large">More</div>
-                 <ul>
-                <li v-for="(adServerObj, adServerIndex) in getAdServerPreference(true)"
+            <ul>
+                <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
                     class="d-flex justify-content-start">
-                   <div :class="adServerObj.FormattedName + '-logo'"
-                        class="ad-server-logo-content">
-                    </div>
-                    <div class="pt-8 ad-server-content">
+                    <div :class="adServerObj.FormattedName + '-logo'"
+                        class="ad-server-logo-content"></div>
+                    <div class="pt-8 ad-server-content border-bottom">
                         <div class="d-flex">
                             <span class="font-weight-strong">{{adServerObj.Name}}</span>
                             <div class="ml-auto">
-                            <span v-for="(protocolObj, rotocolIndex) in adServerObj.Protocols"
+                                <span v-for="protocolObj in adServerObj.Protocols" :key="protocolObj"
                                   class="protocol-content font-size-small mr-8"
                                   :class="protocolObj.toLowerCase() + '-status'">
                                 {{protocolObj}}
@@ -53,9 +83,9 @@
                             </div>
                     </div>
                 </li>
-            </ul>       
+            </ul>
+        </div>
     </div>
-     </div>
 </template>
 <style scoped>
 .ad-server-header {
@@ -102,32 +132,44 @@ import axios from "axios";
 import "../../../assets/css/ad-server-logo.css";
 
 export default {
-  props: ["windowSize"],
-  data() {
-    return {
-      adServerList: []
-    };
-  },
-  beforeCreate: function() {
-    axios.get("/assets/data/ad-servers.json").then(response => {
-      this.adServerList = response.data;
-    });
-  },
-  methods: {
-    getAdServerPreference: function(section) {
-      return this.adServerList.filter(item => {
-        return item.Favorite == section;
-      });
+    props: ["windowSize"],
+    data() {
+        return {
+            adServerList: [],
+            isSearching: false,
+            searchInput: ''
+        };
     },
-    getCommaFormat: function(arr) {
-      return arr
-        .map((item, index, array) => {
-          return index + 1 == array.length
-            ? " & " + item
-            : index == 0 ? item : ", " + item;
-        })
-        .join("");
+    beforeCreate: function() {
+        axios.get("/assets/data/ad-servers.json").then(response => {
+            this.adServerList = response.data;
+        });
+    },
+    computed: {
+        filteredAdServers: function() {
+            return this.searchInput.trim().length > 0 ? this.adServerList.filter(item => {
+                return item.Name.toLowerCase()
+                    .indexOf(this.searchInput.toLowerCase()) > -1;
+            }) : this.adServerList;
+        }
+    },
+    methods: {
+        setSearchStatus: function(status) {
+            this.isSearching = status;
+            this.searchInput = '';
+        },
+        getAdServerPreference: function(section) {
+            return this.adServerList.filter(item => {
+                return item.Favorite == section;
+            });
+        },
+        getCommaFormat: function(arr) {
+            return arr
+                .map((item, index, array) => {
+                    return index + 1 == array.length ? " & " + item : index == 0 ? item : ", " + item;
+                })
+                .join("");
+        }
     }
-  }
 };
 </script>
