@@ -10,6 +10,8 @@ module.exports = {
     './src/app.js'
   ],
   devServer: {
+    contentBase: ".",
+   host: "localhost",
     hot: true,
     watchOptions: {
       poll: true
@@ -29,7 +31,8 @@ module.exports = {
         test: /\.css$/,
         use: [
           'vue-style-loader',
-          'css-loader'
+          'css-loader',
+          'style-loader'
         ]
       },
       {

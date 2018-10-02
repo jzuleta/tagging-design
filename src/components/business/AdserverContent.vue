@@ -104,7 +104,7 @@
 }
 
 .ad-server-logo-content {
-  width: 150px;
+  width: 125px;
   height: 55px;
   background-size: 100px auto;
   background-repeat: no-repeat;
@@ -112,7 +112,7 @@
 }
 
 .ad-server-content {
-  width: 215px;
+  width: 240px;
 }
 
 ul {
