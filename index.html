@@ -8,16 +8,26 @@
   </head>
   <body>
     <div id="app">
-        <overlay-content v-show="adserverSetup"></overlay-content>   
-        <configuration-content v-show="adserverSetup" :window-size="window">          
-          <component :is="configurationView" :window-size="window" :data-type="dataType"></component> 
+        <overlay-content 
+              v-show="configurationVisibility"
+              @configuration-visibility="setConfigurationVisibility">
+        </overlay-content>   
+        <configuration-content v-show="configurationVisibility" :window-size="window">          
+          <component 
+              :is="configurationView" 
+              :window-size="window" 
+              :data-type="dataType"
+              :current-adserver="currentAdServer"
+              @configuration-visibility="setConfigurationVisibility" 
+              @select-adserver="setCurrentAdServer"
+              @change-configuration-view="changeActionView"></component> 
         </configuration-content>        
         <menu-content></menu-content>
         
         <main-content>
             <head-content></head-content>
             <side-menu @change-view="changeView"></side-menu>            
-            <action-content @adserver-setup="adserverSetupStatus">
+            <action-content @show-configuration="setConfigurationVisibility">
                 <component :is="currentView" :window-size="window"></component>
             </action-content>            
       </div>  

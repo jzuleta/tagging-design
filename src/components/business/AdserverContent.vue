@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="ad-server-header d-flex align-items-center border-bottom">
-        <md-button class="md-icon-button" v-show="!isSearching">
+        <md-button class="md-icon-button" v-show="!isSearching" @click="hideConfigurationContent">
             <md-icon>close</md-icon>
         </md-button>
         <h4 class="font-weight-strong w-100" v-show="!isSearching">Select an Ad Server</h4>
@@ -23,7 +23,7 @@
         </md-empty-state>
         <ul>
             <li v-for="adServerObj in filteredAdServers" :key="adServerObj.FormattedName"
-                    class="d-flex justify-content-start">
+                    class="d-flex justify-content-start" @click="selectAdServer(adServerObj, true)">
                 <div :class="adServerObj.FormattedName + '-logo'"
                         class="ad-server-logo-content"></div>
                 <div class="pt-8 ad-server-content border-bottom">
@@ -48,7 +48,7 @@
         <div class="pt-18 font-size-large">Recent</div>
         <ul>
             <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
-                    class="d-flex justify-content-start">
+                    class="d-flex justify-content-start" @click="selectAdServer(adServerObj, false)">
                 <div :class="adServerObj.FormattedName + '-logo'"
                         class="ad-server-logo-content"></div>
                 <div class="pt-8 ad-server-content border-bottom">
@@ -70,8 +70,8 @@
         </ul>
         <div class="pt-18 font-size-large">More</div>
         <ul>
-            <li v-for="adServerObj in getAdServerPreference(true)" :key="adServerObj.FormattedName"
-                    class="d-flex justify-content-start">
+            <li v-for="adServerObj in getAdServerPreference(false)" :key="adServerObj.FormattedName"
+                    class="d-flex justify-content-start" @click="selectAdServer(adServerObj, false)">
                 <div :class="adServerObj.FormattedName + '-logo'"
                         class="ad-server-logo-content"></div>
                 <div class="pt-8 ad-server-content border-bottom">
@@ -180,6 +180,13 @@ export default {
                     return index + 1 == array.length ? " & " + item : index == 0 ? item : ", " + item;
                 })
                 .join("");
+        },
+        selectAdServer:function(adServer, filtered){
+            this.$emit("select-adserver", adServer);
+            this.$emit("change-configuration-view", "basic-adserver-configuration");
+        },
+        hideConfigurationContent:function(){    
+            this.$emit("configuration-visibility", false);
         }
     }
 };

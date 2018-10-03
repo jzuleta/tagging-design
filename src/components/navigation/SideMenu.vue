@@ -28,15 +28,15 @@ export default {
 <template>  
    <div class="col-2 p-0 h-100">
     <ul class="menu-content side-menu p-0 mt-24">
-      <!-- <div  v-for="item in menuItems" :key="item.name" class="d-flex justify-content-start">
+      <div  v-for="item in menuItems" :key="item.name" class="menu-button">
       <md-button class="">
          <div class="d-flex justify-content-start align-items-center">
             <i class="material-icons font-color-light">{{item.icon}}</i>
             <div class="font-size-large ml-24">{{item.name}}</div>
          </div>
       </md-button>
-      </div> -->
-        <li v-for="(item, index) in menuItems" :class="{'active-item' : activeItem == item.name}"           
+      </div>
+        <!-- <li v-for="(item, index) in menuItems" :class="{'active-item' : activeItem == item.name}"           
             @click="changeView(item.name)">
              <md-button>
                <div class="d-flex justify-content-start align-items-center px-24 py-24 w-100">
@@ -45,8 +45,11 @@ export default {
                 </div>
              </md-button>
             
-        </li>
+        </li> -->
     </ul>
 
 </div>
 </template>
+<style scoped>
+
+</style>

@@ -27,7 +27,7 @@
 export default {   
         methods: {
             openAdServerSetup: function() {                  
-                  this.$emit("adserver-setup", true);
+                  this.$emit("show-configuration", true);
             }
       }
 }

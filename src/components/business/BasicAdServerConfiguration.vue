@@ -1,9 +1,14 @@
 <template>
     <div>
-        <div class="ad-server-header d-flex align-items-center border-bottom px-18">
-            <i class="material-icons font-color-light mr-18">arrow_back</i>
-            <h4 class="font-weight-strong">Weborama</h4>
-            <i class="material-icons font-color-light font-size-big ml-auto">star_border</i>
+        <div class="ad-server-header d-flex align-items-center border-bottom">            
+            <md-button class="md-icon-button" @click="backAdServerSelection">
+                <md-icon>arrow_back</md-icon>
+            </md-button>
+            <h4 class="font-weight-strong w-100">{{currentAdserver.Name}}</h4>
+             <md-button class="md-icon-button ml-auto">
+                <md-icon v-if="currentAdserver.Favorite">star</md-icon>
+                <md-icon v-else>star_border</md-icon>
+            </md-button>            
         </div>
         <div  :style="'height:' + (windowSize.height - 110) + 'px;overflow:auto'">
             <div>               
@@ -29,7 +34,7 @@
 }
 </style>
 <script>export default {
-    props: ["windowSize", "dataType"],
+    props: ["windowSize", "dataType", "currentAdserver"],
     data() {
         return {
             dataTypeNames: []
@@ -48,7 +53,10 @@
             }
 
             return tempArray;
-        }
+        },
+        backAdServerSelection:function(){
+            this.$emit("change-configuration-view", "adserver-content");
+        },
     },
     computed: {
         formattedDataType: function() {

@@ -54,8 +54,9 @@ new Vue({
   },
   data: {
     currentView: "dashboard-content",
+    currentAdServer: {},
     configurationView: "adserver-content",
-    adserverSetup: false,
+    configurationVisibility: false,
     dataType: null,
     window: {
       width: 0,
@@ -72,12 +73,18 @@ new Vue({
     changeView: function(view) {
       this.currentView = view;
     },
+    changeActionView:function(view){
+      this.configurationView = view;
+    },
     handleResize() {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     },
-    adserverSetupStatus: function(status){
-      this.adserverSetup = status;
+    setConfigurationVisibility: function(status){        
+      this.configurationVisibility = status;
+    },
+    setCurrentAdServer:function(adServer){      
+      this.currentAdServer = adServer;
     }
   }
 });
