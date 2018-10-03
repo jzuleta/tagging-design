@@ -5,13 +5,11 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: 'development',  
+  mode: 'development',
   entry: [
     './src/app.js'
   ],
   devServer: {
-    contentBase: ".",
-   host: "localhost",
     hot: true,
     watchOptions: {
       poll: true
@@ -31,8 +29,8 @@ module.exports = {
         test: /\.css$/,
         use: [
           'vue-style-loader',
-          'css-loader',
-          'style-loader'
+          'css-loader'/*,
+          'style-loader'*/
         ]
       },
       {
@@ -46,7 +44,7 @@ module.exports = {
             loader: 'file-loader'
           }
         ]
-      }    
+      }
     ]
   },
   resolve: {
@@ -58,7 +56,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      filename:'index.html',
+      filename: 'index.html',
       template: 'index.html',
       inject: true
     })

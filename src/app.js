@@ -1,10 +1,9 @@
-import "bootstrap/dist/css/bootstrap-grid.css";
-import "material-design-icons/iconfont/material-icons.css";
+ import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
 
 import "../assets/css/rules.css";
 import "../assets/css/app.css";
 
-import 'vue-material/dist/vue-material.min.css'
+import '../node_modules/vue-material/dist/vue-material.min.css'
 
 import Vue from "../node_modules/vue/dist/vue.common.js";
 import axios from "axios";
@@ -55,6 +54,7 @@ new Vue({
   },
   data: {
     currentView: "dashboard-content",
+    configurationView: "adserver-content",
     adserverSetup: false,
     dataType: null,
     window: {
