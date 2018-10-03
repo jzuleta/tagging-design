@@ -10,13 +10,16 @@
     <div id="app">
         <overlay-content 
               v-show="configurationVisibility"
-              @configuration-visibility="setConfigurationVisibility">
+              @configuration-visibility="setConfigurationVisibility"
+              @select-adserver="setCurrentAdServer"
+              @change-configuration-view="changeActionView">
         </overlay-content>   
         <configuration-content v-show="configurationVisibility" :window-size="window">          
           <component 
               :is="configurationView" 
               :window-size="window" 
               :data-type="dataType"
+              :adserver-list="adserverList"
               :current-adserver="currentAdServer"
               @configuration-visibility="setConfigurationVisibility" 
               @select-adserver="setCurrentAdServer"

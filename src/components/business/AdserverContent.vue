@@ -143,7 +143,7 @@ import axios from "axios";
 import "../../../assets/css/ad-server-logo.css";
 
 export default {
-    props: ["windowSize"],
+    props: ["windowSize", "adserverList"],
     data() {
         return {
             adServerList: [],
@@ -151,17 +151,12 @@ export default {
             searchInput: ''
         };
     },
-    beforeCreate: function() {
-        axios.get("/assets/data/ad-servers.json").then(response => {
-            this.adServerList = response.data;
-        });
-    },
     computed: {
         filteredAdServers: function() {
-            return this.searchInput.trim().length > 0 ? this.adServerList.filter(item => {
+            return this.searchInput.trim().length > 0 ? this.adserverList.filter(item => {
                 return item.Name.toLowerCase()
                     .indexOf(this.searchInput.toLowerCase()) > -1;
-            }) : this.adServerList;
+            }) : this.adserverList;
         }
     },
     methods: {
@@ -170,7 +165,7 @@ export default {
             this.searchInput = '';
         },
         getAdServerPreference: function(section) {
-            return this.adServerList.filter(item => {
+            return this.adserverList.filter(item => {
                 return item.Favorite == section;
             });
         },

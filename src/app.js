@@ -51,6 +51,9 @@ new Vue({
     axios.get("/assets/data/data-type.json").then(response => {
       this.dataType = response.data;
     });
+    axios.get("/assets/data/ad-servers.json").then(response => {
+      this.adserverList = response.data;
+  });
   },
   data: {
     currentView: "dashboard-content",
@@ -58,6 +61,7 @@ new Vue({
     configurationView: "adserver-content",
     configurationVisibility: false,
     dataType: null,
+    adserverList: null,
     window: {
       width: 0,
       height: 0,

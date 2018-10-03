@@ -5,7 +5,7 @@
                 <md-icon>arrow_back</md-icon>
             </md-button>
             <h4 class="font-weight-strong w-100">{{currentAdserver.Name}}</h4>
-             <md-button class="md-icon-button ml-auto">
+             <md-button class="md-icon-button ml-auto" @click="changeAdServerStatus(currentAdserver)">
                 <md-icon v-if="currentAdserver.Favorite">star</md-icon>
                 <md-icon v-else>star_border</md-icon>
             </md-button>            
@@ -57,6 +57,9 @@
         backAdServerSelection:function(){
             this.$emit("change-configuration-view", "adserver-content");
         },
+        changeAdServerStatus:function(adServer){
+            adServer.Favorite = !adServer.Favorite; 
+        }
     },
     computed: {
         formattedDataType: function() {
