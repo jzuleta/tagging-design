@@ -52,11 +52,16 @@ new Vue({
       this.dataType = response.data;
     });
     axios.get("/assets/data/ad-servers.json").then(response => {
-      this.adserverList = response.data;
-  });
+        this.adserverList = response.data;
+    });
   },
   data: {
     currentView: "dashboard-content",
+    configurationList:{
+      'macro-tag-content':[],
+      'hardcoded-tag-content':[],
+      'video-wrapped-tag-content':[]
+    },
     currentAdServer: {},
     configurationView: "adserver-content",
     configurationVisibility: false,

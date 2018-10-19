@@ -5,21 +5,19 @@
       Default tags automatically create both standard and secure versions of pixel and javascript tags. If additional parameters are required, (i.e. “no block” or “disable flash”) select ‘Edit’
         </p>
         <div class="px-18">
-            <table class="w-100 mt-18">
+                 <table class="w-100 mt-18">
                 <thead>
                     <tr>
-                        <th></th>
                         <th class="font-weight-strong font-size-large font-color-light">Ad Server</th>
                         <th class="font-weight-strong font-size-large font-color-light">Configuration</th>
                         <th class="font-weight-strong font-size-large font-color-light">Media Type</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr v-for="adserver in tagAddedList" :key="adserver.FormattedName">
+                        <td>{{adserver.Name}}</td>
+                        <td>{{adserver.Name}}</td>
+                        <td>{{adserver.Name}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -28,7 +26,13 @@
 </template>
 <script>
 export default {
-  props: ["windowSize"]
+  props: ["windowSize", "configurationList"],
+  computed:{
+      tagAddedList: function(){
+          return this.configurationList['macro-tag-content'];
+      }
+  }
+
 };
 </script>
 

@@ -4,10 +4,10 @@
         "Data": [{
             "id": 1,
             "Name": "Javascript"
-        }, {
+       ,"Value" : false }, {
             "id": 2,
             "Name": "Pixel"
-        }, {
+       ,"Value" : false }, {
             "id": 3,
             "Name": "comScore Script"
         }]
@@ -17,10 +17,10 @@
         "Data": [{
             "id": 1,
             "Name": "Standard"
-        }, {
+       ,"Value" : false }, {
             "id": 2,
             "Name": "Secure"
-        }, {
+       ,"Value" : false }, {
             "id": 3,
             "Name": "Default Protocol"
         }]
@@ -30,13 +30,13 @@
         "Data": [{
             "id": 1,
             "Name": "ILR"
-        }, {
+       ,"Value" : false }, {
             "id": 2,
             "Name": "No Flash"
-        }, {
+       ,"Value" : false }, {
             "id": 3,
             "Name": "No Block"
-        }, {
+       ,"Value" : false }, {
             "id": 4,
             "Name": "Special Content"
         }]
@@ -46,7 +46,7 @@
         "Data": [{
             "id": 1,
             "Name": "Bit 0 7"
-        }, {
+       ,"Value" : false }, {
             "id": 2,
             "Name": "Bit 16 23"
         }]
@@ -56,25 +56,25 @@
         "Data": [{
             "id": 1,
             "Name": "Flash Document"
-        }, {
+       ,"Value" : false }, {
             "id": 2,
             "Name": "Video Web"
-        }, {
+       ,"Value" : false }, {
             "id": 3,
             "Name": "Zip File"
-        }, {
+       ,"Value" : false }, {
             "id": 4,
             "Name": "Audio File"
-        }, {
+       ,"Value" : false }, {
             "id": 5,
             "Name": "Simple Document"
-        }, {
+       ,"Value" : false }, {
             "id": 6,
             "Name": "JSON Format"
-        }, {
+       ,"Value" : false }, {
             "id": 7,
             "Name": "Open Document"
-        }, {
+       ,"Value" : false }, {
             "id": 8,
             "Name": "JPEG Image"
         }]

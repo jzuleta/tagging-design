@@ -16,11 +16,14 @@
                     <div class="pt-18 font-size-small font-color-light px-18 mb-8">{{dataConfig.Title}}</div>
                     <div class="d-flex">
                         <div class="w-50 px-18" v-for="dataChunk in dataConfig.Data" :key="dataChunk.id">
-                            <md-checkbox v-for="value in dataChunk" :key="value.id" class="my-8">{{value.Name}}</md-checkbox>
+                            <md-checkbox v-model="value.Value" v-for="value in dataChunk" :key="value.id" class="my-8">{{value.Name}}</md-checkbox>
                         </div>
                     </div>
                 </div>
             </div>            
+        </div>
+        <div class="d-flex justify-content-end">
+           <md-button @click="hideConfigurationContent()">Add configuration</md-button>
         </div>
     </div>
 </template>
@@ -34,7 +37,7 @@
 }
 </style>
 <script>export default {
-    props: ["windowSize", "dataType", "currentAdserver"],
+    props: ["windowSize", "dataType", "currentAdserver" , "currentView", "configurationList"],
     data() {
         return {
             dataTypeNames: []
@@ -59,6 +62,10 @@
         },
         changeAdServerStatus:function(adServer){
             adServer.Favorite = !adServer.Favorite; 
+        },
+        hideConfigurationContent:function(){   
+            this.configurationList[this.currentView].push(this.currentAdserver) 
+            this.$emit("configuration-visibility", false);
         }
     },
     computed: {

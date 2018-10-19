@@ -27,29 +27,32 @@ export default {
 </script>
 <template>  
    <div class="col-2 p-0 h-100">
-    <ul class="menu-content side-menu p-0 mt-24">
-      <div  v-for="item in menuItems" :key="item.name" class="menu-button">
-      <md-button class="">
+    <ul class="menu-content side-menu p-0 mt-24">      
+      <md-button v-for="item in menuItems" :key="item.name" @click="changeView(item.name)" :class="{'active-item' : activeItem == item.name}">
          <div class="d-flex justify-content-start align-items-center">
             <i class="material-icons font-color-light">{{item.icon}}</i>
             <div class="font-size-large ml-24">{{item.name}}</div>
          </div>
-      </md-button>
-      </div>
-        <!-- <li v-for="(item, index) in menuItems" :class="{'active-item' : activeItem == item.name}"           
-            @click="changeView(item.name)">
-             <md-button>
-               <div class="d-flex justify-content-start align-items-center px-24 py-24 w-100">
-               <i class="material-icons font-color-light">{{item.icon}}</i>
-                <div class="font-size-large ml-24">{{item.name}}</div>
-                </div>
-             </md-button>
-            
-        </li> -->
+      </md-button> 
     </ul>
 
 </div>
 </template>
-<style scoped>
+<style>
+.menu-content button{
+    width: 100%;
+    margin: 0;
+    height: 46px;
+    padding-left: 18px;
+}
+
+.menu-content button .md-ripple{
+      display: flex;
+    justify-content: start;
+}
+
+.menu-content button.active-item{
+  background-color: #d8d8d8
+}
 
 </style>

@@ -15,24 +15,29 @@
               @change-configuration-view="changeActionView">
         </overlay-content>   
         <configuration-content v-show="configurationVisibility" :window-size="window">          
-          <component 
-              :is="configurationView" 
-              :window-size="window" 
-              :data-type="dataType"
-              :adserver-list="adserverList"
-              :current-adserver="currentAdServer"
-              @configuration-visibility="setConfigurationVisibility" 
-              @select-adserver="setCurrentAdServer"
-              @change-configuration-view="changeActionView"></component> 
+          <keep-alive>          
+            <component 
+                :is="configurationView" 
+                :window-size="window" 
+                :data-type="dataType"
+                :adserver-list="adserverList"
+                :current-view="currentView"
+                :current-adserver="currentAdServer"
+                :configuration-list="configurationList"
+                @configuration-visibility="setConfigurationVisibility" 
+                @select-adserver="setCurrentAdServer"
+                @change-configuration-view="changeActionView"></component> 
+              </keep-alive>
         </configuration-content>        
-        <menu-content></menu-content>
-        
+        <menu-content></menu-content>        
         <main-content>
             <head-content></head-content>
-            <side-menu @change-view="changeView"></side-menu>            
-            <action-content @show-configuration="setConfigurationVisibility">
-                <component :is="currentView" :window-size="window"></component>
-            </action-content>            
+            <side-menu @change-view="changeView"></side-menu>       
+              <action-content @show-configuration="setConfigurationVisibility">
+                <component :is="currentView" :configuration-list="configurationList" :window-size="window"></component>
+            </action-content>   
+        </main-content>         
+  
       </div>  
   </body>
 </html>
