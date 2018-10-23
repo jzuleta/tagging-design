@@ -8,7 +8,7 @@ body{
 *{
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;  
-    color: #282828;
+    /* color: #282828; */
     line-height: 20px;
 }
 
@@ -103,6 +103,7 @@ h4{  font-size: 20px;}
 .font-color-light{ color: #7e7d7d;}
 .font-color-normal{ color: #282828;}
 .font-color-white{ color: #FFFFFF;}
+.font-color-blue{color: #448aff}
 
 .border-0{ border: none;}
 .border-top{ border-top:thin solid #E0E0E0}

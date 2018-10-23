@@ -24,7 +24,7 @@
         </div>
         <div class="d-flex justify-content-end">
            <md-button @click="addAdserverConfiguration()">Add configuration</md-button>
-        </div>
+        </div>      
     </div>
 </template>
 <style scoped>
@@ -44,7 +44,8 @@ export default {
     props: ["windowSize", "dataType", "currentAdserver" , "currentView", "configurationList"],  
     data() {
         return {
-            dataTypeNames: []
+            dataTypeNames: [],
+            invalidSections: 0          
         };
     },
     methods: {    
@@ -67,8 +68,27 @@ export default {
         changeAdServerStatus:function(adServer){
             adServer.Favorite = !adServer.Favorite; 
         },
-        addAdserverConfiguration: function() {            
-            this.configurationList[this.currentView].push(Object.assign({
+        validateAdServerConfiguration: function(){
+            this.invalidSections = 0;
+             this.dataTypeNames.forEach(name=>{
+                this.dataType[name].IsValid = 
+                this.dataType[name].Data.some(row =>{ return row.Value});
+
+                this.dataType[name].IsValid ? 0 : this.invalidSections++;
+            });
+        },
+        clearAdServerConfiguration: function(){
+            this.dataTypeNames.forEach(name=>{
+                this.dataType[name].Data.forEach(dataValue =>{
+                    dataValue.Value = false;
+                });
+            });
+        },
+        addAdserverConfiguration: function() {     
+            this.validateAdServerConfiguration();
+
+            if(this.invalidSections == 0){
+                this.configurationList[this.currentView].push(Object.assign({
                     _id: uuidv1(),
                     preferences: this.dataType.Preferences.Data.filter((row, index) => {                                                    
                         return row.Value == true
@@ -78,7 +98,18 @@ export default {
                     })
                 }, this.currentAdserver));
 
-            this.$emit("configuration-visibility", false);
+                this.clearAdServerConfiguration();
+                this.$emit("configuration-visibility", false);
+            }else{                
+                 this.$emit("snackbar-visibility", {
+                    showSnackbar: true,
+                    position: 'center',
+                    duration: 4000,
+                    isInfinity: true,
+                    snackbarMessage: 'You must select at least one element',
+                    snackbarButtonMessage: 'Got it'
+                 });
+            }       
         }
     },
     computed: {     

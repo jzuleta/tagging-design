@@ -1,6 +1,7 @@
 {
     "TagTypes": {
         "Name": "Tag Types",
+        "IsValid" : false,
         "Data": [{
             "id": 1,
             "Name": "Javascript",
@@ -16,6 +17,7 @@
     },
     "ProtocolTypes": {
         "Name": "Protocols",
+        "IsValid" : false,
         "Data": [{
             "id": 1,
             "Name": "Standard",
@@ -31,6 +33,7 @@
     },
     "Preferences": {
         "Name": "Preferences",
+        "IsValid" : false,
         "Data": [{
             "id": 1,
             "Name": "ILR",
@@ -51,6 +54,7 @@
     },
     "MediaType": {
         "Name": "Media Types",
+        "IsValid" : false,
         "Data": [{
             "id": 1,
             "Name": "Flash Document",
@@ -86,6 +90,7 @@
     },
     "Others": {
         "Name": "Others",
+        "IsValid" : false,
         "Data": [{
             "id": 1,
             "Name": "Bit 0 7",

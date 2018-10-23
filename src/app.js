@@ -74,7 +74,13 @@ new Vue({
       height: 0,
       tagContentReference:150,
       mainContentReference: 101
-    }
+    },
+    showSnackbar: false,
+    position: 'center',
+    duration: 4000,
+    isInfinity: false,
+    snackbarMessage: '[MESSAGE]',
+    snackbarButtonMessage: '[OK]'
   },
   created: function() {  
     window.addEventListener("resize", this.handleResize);
@@ -97,6 +103,15 @@ new Vue({
     },
     setCurrentAdServer:function(adServer){      
       this.currentAdServer = adServer;
+    },
+    setSnackbarVisibility:function(snackbarConfiguration){
+      this.showSnackbar= snackbarConfiguration.showSnackbar;
+      this.position= snackbarConfiguration.position;
+      this.duration= snackbarConfiguration.duration;
+      this.isInfinity= snackbarConfiguration.isInfinity;
+      this.snackbarMessage = snackbarConfiguration.snackbarMessage ;
+      this.snackbarButtonMessage= snackbarConfiguration.snackbarButtonMessage;
     }
+
   }
 });
