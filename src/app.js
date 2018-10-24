@@ -49,8 +49,9 @@ new Vue({
   },
   beforeCreate: function() {
     axios.get("/assets/data/data-type.json").then(response => {
-      this.dataType = response.data;
+      this.dataType = response.data;               
     });
+
     axios.get("/assets/data/ad-servers.json").then(response => {
         this.adserverList = response.data;
     });
@@ -63,21 +64,22 @@ new Vue({
       'video-wrapped-tag-content':[]
     },
     currentAdServer: {},
-    configurationView: "adserver-content",
+    configurationView: "",
     configurationVisibility: false,
-    dataType: null,
+    dataType: [],
+    dataTypeDictionary: new Object(),
     adserverList: null,
     window: {
       width: 0,
       height: 0,
-      heightReference:150
+      tagContentReference:150,
+      mainContentReference: 101
     }
   },
-  created: function() {
+  created: function() {  
     window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+    this.handleResize();   
   },
-
   methods: {
     changeView: function(view) {
       this.currentView = view;
@@ -89,8 +91,9 @@ new Vue({
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     },
-    setConfigurationVisibility: function(status){        
+    setConfigurationVisibility: function(status, view){        
       this.configurationVisibility = status;
+      this.configurationView = view;
     },
     setCurrentAdServer:function(adServer){      
       this.currentAdServer = adServer;

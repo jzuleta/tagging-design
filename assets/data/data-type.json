@@ -3,11 +3,13 @@
         "Name": "Tag Types",
         "Data": [{
             "id": 1,
-            "Name": "Javascript"
-       ,"Value" : false }, {
+            "Name": "Javascript",
+            "Value": false
+        }, {
             "id": 2,
-            "Name": "Pixel"
-       ,"Value" : false }, {
+            "Name": "Pixel",
+            "Value": false
+        }, {
             "id": 3,
             "Name": "comScore Script"
         }]
@@ -16,11 +18,13 @@
         "Name": "Protocols",
         "Data": [{
             "id": 1,
-            "Name": "Standard"
-       ,"Value" : false }, {
+            "Name": "Standard",
+            "Value": false
+        }, {
             "id": 2,
-            "Name": "Secure"
-       ,"Value" : false }, {
+            "Name": "Secure",
+            "Value": false
+        }, {
             "id": 3,
             "Name": "Default Protocol"
         }]
@@ -29,54 +33,66 @@
         "Name": "Preferences",
         "Data": [{
             "id": 1,
-            "Name": "ILR"
-       ,"Value" : false }, {
+            "Name": "ILR",
+            "Value": false
+        }, {
             "id": 2,
-            "Name": "No Flash"
-       ,"Value" : false }, {
+            "Name": "No Flash",
+            "Value": false
+        }, {
             "id": 3,
-            "Name": "No Block"
-       ,"Value" : false }, {
+            "Name": "No Block",
+            "Value": false
+        }, {
             "id": 4,
-            "Name": "Special Content"
-        }]
-    },
-    "Others": {
-        "Name": "Others",
-        "Data": [{
-            "id": 1,
-            "Name": "Bit 0 7"
-       ,"Value" : false }, {
-            "id": 2,
-            "Name": "Bit 16 23"
+            "Name": "Special Content",
+            "Value": false
         }]
     },
     "MediaType": {
         "Name": "Media Types",
         "Data": [{
             "id": 1,
-            "Name": "Flash Document"
-       ,"Value" : false }, {
+            "Name": "Flash Document",
+            "Value": false
+        }, {
             "id": 2,
-            "Name": "Video Web"
-       ,"Value" : false }, {
+            "Name": "Video Web",
+            "Value": false
+        }, {
             "id": 3,
-            "Name": "Zip File"
-       ,"Value" : false }, {
+            "Name": "Zip File",
+            "Value": false
+        }, {
             "id": 4,
-            "Name": "Audio File"
-       ,"Value" : false }, {
+            "Name": "Audio File",
+            "Value": false
+        }, {
             "id": 5,
-            "Name": "Simple Document"
-       ,"Value" : false }, {
+            "Name": "Simple Document",
+            "Value": false
+        }, {
             "id": 6,
-            "Name": "JSON Format"
-       ,"Value" : false }, {
+            "Name": "JSON Format",
+            "Value": false
+        }, {
             "id": 7,
-            "Name": "Open Document"
-       ,"Value" : false }, {
+            "Name": "Open Document",
+            "Value": false
+        }, {
             "id": 8,
             "Name": "JPEG Image"
+        }]
+    },
+    "Others": {
+        "Name": "Others",
+        "Data": [{
+            "id": 1,
+            "Name": "Bit 0 7",
+            "Value": false
+        }, {
+            "id": 2,
+            "Name": "Bit 16 23"
         }]
     }
 }

@@ -15,15 +15,15 @@
                 <div v-for="dataConfig in formattedDataType" :key="dataConfig.Title">
                     <div class="pt-18 font-size-small font-color-light px-18 mb-8">{{dataConfig.Title}}</div>
                     <div class="d-flex">
-                        <div class="w-50 px-18" v-for="dataChunk in dataConfig.Data" :key="dataChunk.id">
-                            <md-checkbox v-model="value.Value" v-for="value in dataChunk" :key="value.id" class="my-8">{{value.Name}}</md-checkbox>
+                        <div class="w-50 px-18" v-for="dataChunk in dataConfig.Data" :key="dataChunk.id">                            
+                            <md-checkbox v-model="value.Value" v-for="value in dataChunk" :key="value.id" class="my-8">{{value.Name}}</md-checkbox>                             
                         </div>
                     </div>
                 </div>
             </div>            
         </div>
         <div class="d-flex justify-content-end">
-           <md-button @click="hideConfigurationContent()">Add configuration</md-button>
+           <md-button @click="addAdserverConfiguration()">Add configuration</md-button>
         </div>
     </div>
 </template>
@@ -36,15 +36,19 @@
   cursor: pointer;
 }
 </style>
-<script>export default {
-    props: ["windowSize", "dataType", "currentAdserver" , "currentView", "configurationList"],
+<script>
+const uuidv1 = require('uuid/v1');
+
+
+export default {
+    props: ["windowSize", "dataType", "currentAdserver" , "currentView", "configurationList"],  
     data() {
         return {
             dataTypeNames: []
         };
     },
-    methods: {
-        splitDataType: function(arr) {
+    methods: {    
+        splitDataType: function(arr) {            
             var index = 0;
             var arrayLength = arr.length;
             var tempArray = [];
@@ -63,26 +67,33 @@
         changeAdServerStatus:function(adServer){
             adServer.Favorite = !adServer.Favorite; 
         },
-        hideConfigurationContent:function(){   
-            this.configurationList[this.currentView].push(this.currentAdserver) 
+        addAdserverConfiguration: function() {            
+            this.configurationList[this.currentView].push(Object.assign({
+                    _id: uuidv1(),
+                    preferences: this.dataType.Preferences.Data.filter((row, index) => {                                                    
+                        return row.Value == true
+                    }),
+                    mediaTypes: this.dataType.MediaType.Data.filter((row, index) => {
+                        return row.Value == true
+                    })
+                }, this.currentAdserver));
+
             this.$emit("configuration-visibility", false);
         }
     },
-    computed: {
-        formattedDataType: function() {
-            if (this.dataType) {
-                this.dataTypeNames =
-                    Object.getOwnPropertyNames(this.dataType)
-                    .filter(item => {
-                        return item != '__ob__'
-                    });
-                return this.dataTypeNames.map(name => {
-                    return {
-                        Title: this.dataType[name].Name,
-                        Data: this.splitDataType(this.dataType[name].Data)
-                    };
+    computed: {     
+        formattedDataType: function() {              
+            this.dataTypeNames =
+                Object.getOwnPropertyNames(this.dataType)
+                .filter(item => {
+                    return item != '__ob__'
                 });
-            }
+            return this.dataTypeNames.map(name => {
+                return {
+                    Title: this.dataType[name].Name,
+                    Data: this.splitDataType(this.dataType[name].Data)
+                };
+            });            
         }
     }
 };

@@ -26,18 +26,20 @@
                 :configuration-list="configurationList"
                 @configuration-visibility="setConfigurationVisibility" 
                 @select-adserver="setCurrentAdServer"
-                @change-configuration-view="changeActionView"></component> 
-              </keep-alive>
+                @change-configuration-view="changeActionView">
+              </component> 
+            </keep-alive>
         </configuration-content>        
         <menu-content></menu-content>        
         <main-content>
             <head-content></head-content>
             <side-menu @change-view="changeView"></side-menu>       
-              <action-content @show-configuration="setConfigurationVisibility">
+              <action-content 
+              :current-view="currentView"
+              @show-configuration="setConfigurationVisibility">
                 <component :is="currentView" :configuration-list="configurationList" :window-size="window"></component>
             </action-content>   
-        </main-content>         
-  
+        </main-content>
       </div>  
   </body>
 </html>

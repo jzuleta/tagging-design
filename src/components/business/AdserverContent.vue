@@ -144,6 +144,7 @@ import "../../../assets/css/ad-server-logo.css";
 
 export default {
     props: ["windowSize", "adserverList"],
+  
     data() {
         return {
             adServerList: [],
@@ -153,10 +154,12 @@ export default {
     },
     computed: {
         filteredAdServers: function() {
-            return this.searchInput.trim().length > 0 ? this.adserverList.filter(item => {
-                return item.Name.toLowerCase()
-                    .indexOf(this.searchInput.toLowerCase()) > -1;
-            }) : this.adserverList;
+            if(this.adserverList){
+                return this.searchInput.trim().length > 0 ? this.adserverList.filter(item => {
+                    return item.Name.toLowerCase()
+                        .indexOf(this.searchInput.toLowerCase()) > -1;
+                }) : this.adserverList;
+            }
         }
     },
     methods: {
