@@ -5,31 +5,35 @@
         If additional parameters are required, (i.e. “no block” or “disable flash”) select ‘Edit’
         </p>
          <div class="px-18">
-            <table class="w-100 mt-18">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th class="font-weight-strong font-size-large font-color-light">Ad Server</th>
-                        <th class="font-weight-strong font-size-large font-color-light">File Uploaded</th>
-                        <th class="font-weight-strong font-size-large font-color-light">Configuration</th>
-                        <th class="font-weight-strong font-size-large font-color-light">Media Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+             <md-table v-model="tagAddedList">   
+                <md-table-empty-state                    
+                    md-label="No tag added"
+                    md-description="Click on Add New Tag Configuration button">
+                </md-table-empty-state>               
+                <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple">
+                    <md-table-cell md-label="Ad server" md-sort-by="email">{{ item.Name }}</md-table-cell>
+                    <md-table-cell md-label="Configuration" md-sort-by="gender">
+                        <div v-for="preference in item.Preferences" :key="preference.id">
+                            {{preference.Name}}
+                        </div>
+                    </md-table-cell>
+                    <md-table-cell md-label="Media Type" md-sort-by="title">
+                        <div v-for="mediaTypes in item.MediaTypes" :key="mediaTypes.id">
+                            {{mediaTypes.Name}}
+                        </div>
+                    </md-table-cell>
+                </md-table-row>
+            </md-table>
         </div>   
     </div>
 </template>
 <script>
 export default {
-  props: ["windowSize"]
+  props: ["windowSize", "configurationList"],
+    computed:{
+        tagAddedList: function(){
+            return this.configurationList['video-wrapped-tag-content'];
+        }    
+    }
 };
 </script>

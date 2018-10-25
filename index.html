@@ -36,9 +36,14 @@
             <head-content></head-content>
             <side-menu @change-view="changeView"></side-menu>       
               <action-content 
-              :current-view="currentView"
+              :current-view="currentView"              
               @show-configuration="setConfigurationVisibility">
-                <component :is="currentView" :configuration-list="configurationList" :window-size="window"></component>
+                <component 
+                  :is="currentView" 
+                  :configuration-list="configurationList" 
+                  @set-current-adserver-configuration="setCurrentAdserverConfiguration"
+                  :window-size="window">
+                </component>
             </action-content>   
         </main-content>
         <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active="showSnackbar" md-persistent>

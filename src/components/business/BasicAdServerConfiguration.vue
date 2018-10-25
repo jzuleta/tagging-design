@@ -1,14 +1,17 @@
 <template>
     <div>
         <div class="ad-server-header d-flex align-items-center border-bottom">            
-            <md-button class="md-icon-button" @click="backAdServerSelection">
+            <md-button class="md-icon-button" v-show="!isEditing" @click="backAdServerSelection">
                 <md-icon>arrow_back</md-icon>
             </md-button>
-            <h4 class="font-weight-strong w-100">{{currentAdserver.Name}}</h4>
-             <md-button class="md-icon-button ml-auto" @click="changeAdServerStatus(currentAdserver)">
+            <h4 class="font-weight-strong w-100" :class="{'ml-18' : isEditing}">{{currentAdserver.Name}}</h4>
+             <md-button class="md-icon-button ml-auto" v-show="!isEditing" @click="changeAdServerStatus(currentAdserver)">
                 <md-icon v-if="currentAdserver.Favorite">star</md-icon>
                 <md-icon v-else>star_border</md-icon>
-            </md-button>            
+            </md-button>     
+             <md-button class="md-icon-button ml-auto" v-show="isEditing" @click="closeEdition()">
+                <md-icon>close</md-icon>
+            </md-button>       
         </div>
         <div  :style="'height:' + (windowSize.height - 110) + 'px;overflow:auto'">
             <div>               
@@ -23,7 +26,8 @@
             </div>            
         </div>
         <div class="d-flex justify-content-end">
-           <md-button @click="addAdserverConfiguration()">Add configuration</md-button>
+           <md-button @click="addAdserverConfiguration()" v-show="!isEditing">Add configuration</md-button>
+           <md-button v-show="isEditing">Confirm changes</md-button>
         </div>      
     </div>
 </template>
@@ -45,6 +49,7 @@ export default {
     data() {
         return {
             dataTypeNames: [],
+            selectedConfiguration: [],
             invalidSections: 0          
         };
     },
@@ -62,23 +67,35 @@ export default {
 
             return tempArray;
         },       
-        readAdServerConfiguration(){            
-            this.currentAdserver.Configuration.forEach(adServerConfig => {
+        readAdServerConfiguration(){              
+            (this.isEditing ? this.selectedConfiguration : this.currentAdserver.Configuration).forEach(adServerConfig => {
                 this.dataTypeNames.forEach(name => {
                     var dataTypeSelection = this.dataType[name].Data.filter(dataValue => {
                         return dataValue.Name == adServerConfig;                        
                     });
                     
-                    if(dataTypeSelection.length >0){
+                    if(dataTypeSelection.length > 0){
                         dataTypeSelection[0].Value = true;
                         return;
                     }                        
                 });
            });
         },
+        readAdServerSelection(){            
+            this.selectedConfiguration.length = 0;
+            this.dataTypeNames.forEach(name => {
+                this.currentAdserver[name].forEach(selection=>{
+                      this.selectedConfiguration.push(selection.Name);
+                 });                 
+             });             
+        },
         backAdServerSelection:function(){
             this.clearAdServerConfiguration();
             this.$emit("change-configuration-view", "adserver-content");
+        },
+        closeEdition(){
+            this.clearAdServerConfiguration();
+             this.$emit("configuration-visibility", false); 
         },
         changeAdServerStatus:function(adServer){
             adServer.Favorite = !adServer.Favorite; 
@@ -102,16 +119,26 @@ export default {
         addAdserverConfiguration: function() {     
             this.validateAdServerConfiguration();
 
-            if(this.invalidSections == 0){
+            if(this.invalidSections == 0){                
                 this.configurationList[this.currentView].push(Object.assign({
                     _id: uuidv1(),
-                    preferences: this.dataType.Preferences.Data.filter((row, index) => {                                                    
+                    Preferences: this.dataType.Preferences.Data.filter((row, index) => {                                                    
                         return row.Value == true
                     }),
-                    mediaTypes: this.dataType.MediaType.Data.filter((row, index) => {
+                    MediaTypes: this.dataType.MediaTypes.Data.filter((row, index) => {
+                        return row.Value == true
+                    }),
+                    Protocols: this.dataType.Protocols.Data.filter((row, index) => {
+                        return row.Value == true
+                    }),
+                    TagTypes: this.dataType.TagTypes.Data.filter((row, index) => {
+                        return row.Value == true
+                    }),
+                    Others: this.dataType.Others.Data.filter((row, index) => {
                         return row.Value == true
                     })
                 }, this.currentAdserver));
+                
 
                 this.clearAdServerConfiguration();
                 this.$emit("configuration-visibility", false);
@@ -134,6 +161,7 @@ export default {
                 .filter(item => {
                     return item != '__ob__'
                 });
+            this.isEditing ? this.readAdServerSelection() : null;
             this.readAdServerConfiguration();
             return this.dataTypeNames.map(name => {                   
                 return {
@@ -141,6 +169,9 @@ export default {
                     Data: this.splitDataType(this.dataType[name].Data)
                 };
             });            
+        },
+        isEditing(){
+            return this.currentAdserver.hasOwnProperty('_id');
         }
     }
 };

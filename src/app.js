@@ -27,6 +27,7 @@ import BasicAdserverConfiguration from "./components/business/BasicAdserverConfi
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import { debug } from "util";
 
 Vue.use(VueMaterial)
 
@@ -102,7 +103,10 @@ new Vue({
       this.configurationView = view;
     },
     setCurrentAdServer:function(adServer){      
-      this.currentAdServer = adServer;
+      this.currentAdServer = {
+        Name: adServer.Name,
+        Configuration: adServer.Configuration
+      };
     },
     setSnackbarVisibility:function(snackbarConfiguration){
       this.showSnackbar= snackbarConfiguration.showSnackbar;
@@ -111,7 +115,10 @@ new Vue({
       this.isInfinity= snackbarConfiguration.isInfinity;
       this.snackbarMessage = snackbarConfiguration.snackbarMessage ;
       this.snackbarButtonMessage= snackbarConfiguration.snackbarButtonMessage;
+    },
+    setCurrentAdserverConfiguration(adServer){
+      this.currentAdServer = adServer;
+      this.setConfigurationVisibility(true,"basic-adserver-configuration");
     }
-
   }
 });

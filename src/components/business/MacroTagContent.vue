@@ -10,15 +10,15 @@
                     md-label="No tag added"
                     md-description="Click on Add New Tag Configuration button">
                 </md-table-empty-state>               
-                <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple">
+                <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple" @click="setAdserverConfiguration(item)">
                     <md-table-cell md-label="Ad server" md-sort-by="email">{{ item.Name }}</md-table-cell>
                     <md-table-cell md-label="Configuration" md-sort-by="gender">
-                        <div v-for="preference in item.preferences" :key="preference.id">
+                        <div v-for="preference in item.Preferences" :key="preference.id">
                             {{preference.Name}}
                         </div>
                     </md-table-cell>
                     <md-table-cell md-label="Media Type" md-sort-by="title">
-                        <div v-for="mediaTypes in item.mediaTypes" :key="mediaTypes.id">
+                        <div v-for="mediaTypes in item.MediaTypes" :key="mediaTypes.id">
                             {{mediaTypes.Name}}
                         </div>
                     </md-table-cell>
@@ -30,6 +30,11 @@
 <script>
 export default {
   props: ["windowSize", "configurationList"],
+  methods:{
+      setAdserverConfiguration(adserver){          
+           this.$emit("set-current-adserver-configuration", adserver);
+      }
+  },
   computed:{
       tagAddedList: function(){
         return this.configurationList['macro-tag-content'];

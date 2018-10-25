@@ -16,7 +16,7 @@
             "Value": false
         }]
     },
-    "ProtocolTypes": {
+    "Protocols": {
         "Name": "Protocols",
         "IsValid" : false,
         "Data": [{
@@ -29,7 +29,8 @@
             "Value": false
         }, {
             "id": 3,
-            "Name": "Default Protocol"
+            "Name": "Default Protocol",
+            "Value": false
         }]
     },
     "Preferences": {
@@ -53,7 +54,7 @@
             "Value": false
         }]
     },
-    "MediaType": {
+    "MediaTypes": {
         "Name": "Media Types",
         "IsValid" : false,
         "Data": [{
@@ -86,7 +87,8 @@
             "Value": false
         }, {
             "id": 8,
-            "Name": "JPEG Image"
+            "Name": "JPEG Image",
+            "Value": false
         }]
     },
     "Others": {
@@ -98,7 +100,8 @@
             "Value": false
         }, {
             "id": 2,
-            "Name": "Bit 16 23"
+            "Name": "Bit 16 23",
+            "Value": false
         }]
     }
 }
