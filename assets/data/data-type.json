@@ -12,7 +12,8 @@
             "Value": false
         }, {
             "id": 3,
-            "Name": "comScore Script"
+            "Name": "comScore Script",
+            "Value": false
         }]
     },
     "ProtocolTypes": {

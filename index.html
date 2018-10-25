@@ -15,7 +15,7 @@
               @change-configuration-view="changeActionView">
         </overlay-content>   
         <configuration-content v-show="configurationVisibility" :window-size="window">          
-          <keep-alive>          
+          <!-- <keep-alive>           -->
             <component 
                 :is="configurationView" 
                 :window-size="window" 
@@ -29,7 +29,7 @@
                 @select-adserver="setCurrentAdServer"
                 @change-configuration-view="changeActionView">
               </component> 
-            </keep-alive>
+            <!-- </keep-alive> -->
         </configuration-content>        
         <menu-content></menu-content>        
         <main-content>

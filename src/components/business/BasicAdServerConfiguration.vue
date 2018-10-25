@@ -56,13 +56,28 @@ export default {
             var chunkSize = arrayLength > 3 ? arrayLength / 2 : arrayLength;
 
             for (index = 0; index < arrayLength; index += chunkSize) {
-                var myChunk = arr.slice(index, index + chunkSize);
+                var myChunk = arr.slice(index, index + chunkSize);            
                 tempArray.push(myChunk);
             }
 
             return tempArray;
+        },       
+        readAdServerConfiguration(){            
+            this.currentAdserver.Configuration.forEach(adServerConfig => {
+                this.dataTypeNames.forEach(name => {
+                    var dataTypeSelection = this.dataType[name].Data.filter(dataValue => {
+                        return dataValue.Name == adServerConfig;                        
+                    });
+                    
+                    if(dataTypeSelection.length >0){
+                        dataTypeSelection[0].Value = true;
+                        return;
+                    }                        
+                });
+           });
         },
         backAdServerSelection:function(){
+            this.clearAdServerConfiguration();
             this.$emit("change-configuration-view", "adserver-content");
         },
         changeAdServerStatus:function(adServer){
@@ -119,7 +134,8 @@ export default {
                 .filter(item => {
                     return item != '__ob__'
                 });
-            return this.dataTypeNames.map(name => {
+            this.readAdServerConfiguration();
+            return this.dataTypeNames.map(name => {                   
                 return {
                     Title: this.dataType[name].Name,
                     Data: this.splitDataType(this.dataType[name].Data)
