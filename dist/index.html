@@ -8,18 +8,48 @@
   </head>
   <body>
     <div id="app">
-        <overlay-content v-show="configurationVisibility"></overlay-content>   
+        <overlay-content 
+              v-show="configurationVisibility"
+              @configuration-visibility="setConfigurationVisibility"
+              @select-adserver="setCurrentAdServer"
+              @change-configuration-view="changeActionView">
+        </overlay-content>   
         <configuration-content v-show="configurationVisibility" :window-size="window">          
-          <component :is="configurationView" :window-size="window" :data-type="dataType"></component> 
+          <!-- <keep-alive>           -->
+            <component 
+                :is="configurationView" 
+                :window-size="window" 
+                :data-type="dataType"
+                :adserver-list="adserverList"
+                :current-view="currentView"
+                :current-adserver="currentAdServer"
+                :configuration-list="configurationList"
+                @configuration-visibility="setConfigurationVisibility" 
+                @snackbar-visibility="setSnackbarVisibility"
+                @select-adserver="setCurrentAdServer"
+                @change-configuration-view="changeActionView">
+              </component> 
+            <!-- </keep-alive> -->
         </configuration-content>        
-        <menu-content></menu-content>
-        
+        <menu-content></menu-content>        
         <main-content>
             <head-content></head-content>
-            <side-menu @change-view="changeView"></side-menu>            
-            <action-content @adserver-setup="setConfigurationVisibility">
-                <component :is="currentView" :window-size="window"></component>
-            </action-content>            
+            <side-menu @change-view="changeView"></side-menu>       
+              <action-content 
+              :current-view="currentView"              
+              @show-configuration="setConfigurationVisibility">
+                <component 
+                  :is="currentView" 
+                  :configuration-list="configurationList" 
+                  @set-current-adserver-configuration="setCurrentAdserverConfiguration"
+                  :window-size="window">
+                </component>
+            </action-content>   
+        </main-content>
+        <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active="showSnackbar" md-persistent>
+                <span class="font-color-white">{{snackbarMessage}}</span>
+                <md-button class="md-raised md-primary" @click="showSnackbar = false">{{snackbarButtonMessage}}</md-button>
+        </md-snackbar>
       </div>  
   <script type="text/javascript" src="main.js"></script></body>
 </html>

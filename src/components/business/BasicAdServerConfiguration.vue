@@ -122,6 +122,7 @@ export default {
             if(this.invalidSections == 0){                
                 this.configurationList[this.currentView].push(Object.assign({
                     _id: uuidv1(),
+                    SelectedStatus:false,
                     Preferences: this.dataType.Preferences.Data.filter((row, index) => {                                                    
                         return row.Value == true
                     }),
