@@ -142,10 +142,16 @@ new Vue({
         .findIndex(element=> {return element._id == id}), 1)
       });
       
-
       this.showSnackbarDelete = false;
     },
     onRevertRemove(){
+
+      this.confirmRemove.forEach(id=>{
+        var index = this.configurationList[this.currentView].findIndex(element => element._id == id);
+        this.configurationList[this.currentView][index].Visibility = true;
+        this.configurationList[this.currentView][index].SelectedStatus = false;
+      });
+
       this.showSnackbarDelete = false;
     },
     actionSectionVisivility(visivility){
