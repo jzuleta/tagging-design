@@ -21,9 +21,9 @@
 
 export default {   
       props:["currentView", "hasSelectedData"],
-        methods: {
+            methods: {
             openAdServerSetup: function() {                  
-                   this.$emit("show-configuration", true, 'adserver-content');
+                        this.$emit("show-configuration", true, 'adserver-content');
             }
       },
       computed:{

@@ -13,13 +13,13 @@
                 <md-icon>close</md-icon>
             </md-button>       
         </div>
-        <div  :style="'height:' + (windowSize.height - 110) + 'px;overflow:auto'">
+        <div :style="'height:' + (windowSize.height - 110) + 'px;overflow:auto'">
             <div>               
                 <div v-for="dataConfig in formattedDataType" :key="dataConfig.Title">
                     <div class="pt-18 font-size-small font-color-light px-18 mb-8">{{dataConfig.Title}}</div>
                     <div class="d-flex">
-                        <div class="w-50 px-18" v-for="dataChunk in dataConfig.Data" :key="dataChunk.id">                            
-                            <md-checkbox v-model="value.Value" v-for="value in dataChunk" :key="value.id" class="my-8">{{value.Name}}</md-checkbox>                             
+                        <div class="px-18" :class="[dataConfig.Data.length == 1 ? 'w-100': 'w-50']" v-for="dataChunk in dataConfig.Data" :key="dataChunk.id">                            
+                            <md-checkbox v-model="value.Value" v-for="value in dataChunk" :key="value.id" class="my-8" :class="{'w-100' :dataConfig.Data.length == 1  }">{{value.Name}}</md-checkbox>                             
                         </div>
                     </div>
                 </div>
@@ -54,11 +54,11 @@ export default {
         };
     },
     methods: {    
-        splitDataType: function(arr) {            
+        splitDataType: function(arr, chunk) {            
             var index = 0;
             var arrayLength = arr.length;
             var tempArray = [];
-            var chunkSize = arrayLength > 3 ? arrayLength / 2 : arrayLength;
+            var chunkSize = chunk? chunk : arrayLength > 3 ? arrayLength / 2 : arrayLength;
 
             for (index = 0; index < arrayLength; index += chunkSize) {
                 var myChunk = arr.slice(index, index + chunkSize);            
@@ -102,7 +102,7 @@ export default {
         },
         validateAdServerConfiguration: function(){
             this.invalidSections = 0;
-             this.dataTypeNames.forEach(name=>{
+             this.dataTypeNames.forEach(name=>{                
                 this.dataType[name].IsValid = 
                 this.dataType[name].Data.some(row =>{ return row.Value});
 
@@ -119,26 +119,19 @@ export default {
         addAdserverConfiguration: function() {     
             this.validateAdServerConfiguration();
 
-            if(this.invalidSections == 0){                
+            if(this.invalidSections == 0){ 
+                var Configuration = new Object();
+
+                this.dataTypeNames.forEach(name => {
+                    Configuration[name] = this.dataType[name].Data.filter((row, index) => {                                                    
+                        return row.Value == true
+                    });
+                });   
+
                 this.configurationList[this.currentView].push(Object.assign({
                     _id: uuidv1(),
-                    SelectedStatus:false,
-                    Preferences: this.dataType.Preferences.Data.filter((row, index) => {                                                    
-                        return row.Value == true
-                    }),
-                    MediaTypes: this.dataType.MediaTypes.Data.filter((row, index) => {
-                        return row.Value == true
-                    }),
-                    Protocols: this.dataType.Protocols.Data.filter((row, index) => {
-                        return row.Value == true
-                    }),
-                    TagTypes: this.dataType.TagTypes.Data.filter((row, index) => {
-                        return row.Value == true
-                    }),
-                    Others: this.dataType.Others.Data.filter((row, index) => {
-                        return row.Value == true
-                    })
-                }, this.currentAdserver));
+                    SelectedStatus:false
+                },Configuration, this.currentAdserver));
                 
 
                 this.clearAdServerConfiguration();
@@ -161,13 +154,20 @@ export default {
                 Object.getOwnPropertyNames(this.dataType)
                 .filter(item => {
                     return item != '__ob__'
-                });
+                });            
+            
+            this.dataTypeNames = this.dataTypeNames.filter((name, index)=>{
+                return this.dataType[name].Grid.some(grid=> grid == this.currentView)
+            });            
+
             this.isEditing ? this.readAdServerSelection() : null;
+
             this.readAdServerConfiguration();
             return this.dataTypeNames.map(name => {                   
                 return {
                     Title: this.dataType[name].Name,
-                    Data: this.splitDataType(this.dataType[name].Data)
+                    Visibility: this.dataType[name].Grid.some(grid=> grid == this.currentView),
+                    Data: this.splitDataType(this.dataType[name].Data, this.dataType[name].Chunk)
                 };
             });            
         },

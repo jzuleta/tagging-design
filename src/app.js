@@ -68,7 +68,6 @@ new Vue({
     configurationView: "",
     configurationVisibility: false,
     dataType: [],
-    dataTypeDictionary: new Object(),
     adserverList: null,
     hasSelectedData: false,  
     window: {
@@ -106,7 +105,8 @@ new Vue({
     setCurrentAdServer:function(adServer){      
       this.currentAdServer = {
         Name: adServer.Name,
-        Configuration: adServer.Configuration
+        Configuration: adServer.Configuration,
+        FormattedName: adServer.FormattedName
       };
     },
     setSnackbarVisibility:function(snackbarConfiguration){

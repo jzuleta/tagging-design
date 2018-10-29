@@ -5,7 +5,7 @@
       "TagTypes": ["Javascript", "Pixel", "Dynamic CS"],
       "Protocols": ["Secure"],
       "Favorite": true,
-      "Configuration": ["Javascript", "comScore Script", "Secure", "Special Content", "ILR", "Audio File" ,"JSON Format", "Bit 0 7"]
+      "Configuration": ["Javascript", "comScore Script", "Secure", "Special Content", "ILR", "Audio File" ,"JSON Format", "Bit 0 7", "Disable Blocking"]
     },
     {
       "FormattedName": "amobee",
