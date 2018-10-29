@@ -70,6 +70,7 @@ new Vue({
     dataType: [],
     dataTypeDictionary: new Object(),
     adserverList: null,
+    hasSelectedData: false,  
     window: {
       width: 0,
       height: 0,
@@ -119,6 +120,9 @@ new Vue({
     setCurrentAdserverConfiguration(adServer){
       this.currentAdServer = adServer;
       this.setConfigurationVisibility(true,"basic-adserver-configuration");
-    }
+    },
+    actionSectionVisivility(visivility){
+      this.hasSelectedData = visivility;
+    } 
   }
 });

@@ -39,10 +39,11 @@
               :current-view="currentView"              
               @show-configuration="setConfigurationVisibility">
                 <component 
-                  :is="currentView" 
+                  :is="currentView"                   
+                  :window-size="window"
                   :configuration-list="configurationList" 
-                  @set-current-adserver-configuration="setCurrentAdserverConfiguration"
-                  :window-size="window">
+                  @action-section-visivility="actionSectionVisivility"
+                  @set-current-adserver-configuration="setCurrentAdserverConfiguration">
                 </component>
             </action-content>   
         </main-content>

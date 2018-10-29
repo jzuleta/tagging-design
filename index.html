@@ -36,11 +36,13 @@
             <head-content></head-content>
             <side-menu @change-view="changeView"></side-menu>       
               <action-content 
+              :has-selected-data="hasSelectedData" 
               :current-view="currentView"              
               @show-configuration="setConfigurationVisibility">
                 <component 
                   :is="currentView" 
                   :configuration-list="configurationList" 
+                  @action-section-visivility="actionSectionVisivility"
                   @set-current-adserver-configuration="setCurrentAdserverConfiguration"
                   :window-size="window">
                 </component>

@@ -14,7 +14,7 @@
                     <md-table-head>Configuration</md-table-head>
                     <md-table-head>Media Type</md-table-head>
                 </md-table-row>
-                <md-table-row v-for="adserver in tagAddedList" :key="adserver._id">
+                <md-table-row v-for="adserver in tagAddedList" :key="adserver._id" @click="setAdserverConfiguration(adserver)">
                     <md-table-cell>
                          <md-checkbox v-model="adserver.SelectedStatus"></md-checkbox>                        
                     </md-table-cell>
@@ -45,23 +45,32 @@ export default {
     watch: {
         allSelectedStatus: function(val) {
             this.allSelected = val;
+        },
+        someSelectedStatus(newValue, oldValue){                        
+            this.$emit("action-section-visivility", newValue);
+
         }
     },
     methods: {
         setAdserverConfiguration(adserver) {
                 this.$emit("set-current-adserver-configuration", adserver);
-            },
-            selectAllAction() {
-                this.tagAddedList.forEach(element => {
-                    element.SelectedStatus = this.allSelected
-                });
-            }
+        },
+        selectAllAction() {
+            this.tagAddedList.forEach(element => {
+                element.SelectedStatus = this.allSelected
+            });
+        }
     },
     computed: {
         allSelectedStatus() {
-                return this.tagAddedList.every(adserver => {
-                    return adserver.SelectedStatus;
-                });
+            return this.tagAddedList.every(adserver => {
+                return adserver.SelectedStatus;
+            });
+        },
+        someSelectedStatus(){
+            return this.tagAddedList.some(adserver => {
+                return adserver.SelectedStatus;
+            });
         },
         tagAddedList: function() {
             return this.configurationList['macro-tag-content'];

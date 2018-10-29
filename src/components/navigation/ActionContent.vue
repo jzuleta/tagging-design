@@ -1,10 +1,10 @@
 <template>
     <div class="col-10 p-0 pr-24 action-content">
         <div class="d-flex justify-content-end">
-            <md-button class="mdc-button" v-show="false">                              
+            <md-button class="mdc-button" v-show="hasSelectedData">                              
                   File Management
             </md-button>
-            <md-button class="mdc-button" v-show="false">                              
+            <md-button class="mdc-button" v-show="hasSelectedData">                              
                   Remove Selection
             </md-button>
             <md-button class="mdc-button" @click="openAdServerSetup" v-show="isTagAddition">                              
@@ -20,7 +20,7 @@
 <script>
 
 export default {   
-      props:["currentView"],
+      props:["currentView", "hasSelectedData"],
         methods: {
             openAdServerSetup: function() {                  
                    this.$emit("show-configuration", true, 'adserver-content');
@@ -28,7 +28,7 @@ export default {
       },
       computed:{
             isTagAddition(){
-                  return this.currentView != 'dashboard-content'
+                  return this.currentView != 'dashboard-content' && this.hasSelectedData == false;
             }
       }
 }
