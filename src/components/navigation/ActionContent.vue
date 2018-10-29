@@ -4,7 +4,7 @@
             <md-button class="mdc-button" v-show="hasSelectedData">                              
                   File Management
             </md-button>
-            <md-button class="mdc-button" v-show="hasSelectedData">                              
+            <md-button class="mdc-button" @click="removeSelectedAdServers()" v-show="hasSelectedData">                              
                   Remove Selection
             </md-button>
             <md-button class="mdc-button" @click="openAdServerSetup" v-show="isTagAddition">                              
@@ -23,7 +23,10 @@ export default {
       props:["currentView", "hasSelectedData"],
             methods: {
             openAdServerSetup: function() {                  
-                        this.$emit("show-configuration", true, 'adserver-content');
+                  this.$emit("show-configuration", true, 'adserver-content');
+            },
+            removeSelectedAdServers(){                  
+                  this.$emit("remove-selected-adservers");
             }
       },
       computed:{

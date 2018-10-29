@@ -37,7 +37,8 @@
             <side-menu @change-view="changeView"></side-menu>       
               <action-content 
               :has-selected-data="hasSelectedData" 
-              :current-view="currentView"              
+              :current-view="currentView"
+              @remove-selected-adservers="removeSelectedAdservers"
               @show-configuration="setConfigurationVisibility">
                 <component 
                   :is="currentView" 
@@ -51,6 +52,14 @@
         <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active="showSnackbar" md-persistent>
                 <span class="font-color-white">{{snackbarMessage}}</span>
                 <md-button class="md-raised md-primary" @click="showSnackbar = false">{{snackbarButtonMessage}}</md-button>
+        </md-snackbar>
+
+        <md-snackbar :md-position="'center'" :md-active="showSnackbarDelete">
+          <span class="font-color-white">{{snackbarMessage}}</span>
+          <div>
+            <md-button class="md-raised md-primary" @click="onConfirmRemove()">Confirm</md-button>
+            <md-button class="md-raised" @click=onRevertRemove()>Undo</md-button>
+          </div>
         </md-snackbar>
       </div>  
   </body>

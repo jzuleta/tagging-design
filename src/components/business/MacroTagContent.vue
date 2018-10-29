@@ -14,7 +14,7 @@
                     <md-table-head>Configuration</md-table-head>
                     <md-table-head>Media Type</md-table-head>
                 </md-table-row>
-                <md-table-row v-for="adserver in tagAddedList" :key="adserver._id" @click="setAdserverConfiguration(adserver)">
+                <md-table-row v-for="adserver in tagAddedList" :key="adserver._id" v-show="adserver.Visibility" @click="setAdserverConfiguration(adserver)">
                     <md-table-cell>
                          <md-checkbox v-model="adserver.SelectedStatus"></md-checkbox>                        
                     </md-table-cell>
@@ -64,12 +64,12 @@ export default {
     computed: {
         allSelectedStatus() {
             return this.tagAddedList.every(adserver => {
-                return adserver.SelectedStatus;
+                return adserver.SelectedStatus && adserver.Visibility;
             });
         },
         someSelectedStatus(){
             return this.tagAddedList.some(adserver => {
-                return adserver.SelectedStatus;
+                return adserver.SelectedStatus && adserver.Visibility;
             });
         },
         tagAddedList: function() {

@@ -63,7 +63,8 @@ new Vue({
       'macro-tag-content':[],
       'hardcoded-tag-content':[],
       'video-wrapped-tag-content':[]
-    },
+    }, 
+    confirmRemove:[],
     currentAdServer: {},
     configurationView: "",
     configurationVisibility: false,
@@ -76,6 +77,7 @@ new Vue({
       tagContentReference:150,
       mainContentReference: 101
     },
+    showSnackbarDelete:false,
     showSnackbar: false,
     position: 'center',
     duration: 4000,
@@ -121,8 +123,33 @@ new Vue({
       this.currentAdServer = adServer;
       this.setConfigurationVisibility(true,"basic-adserver-configuration");
     },
+    removeSelectedAdservers(){      
+      this.confirmRemove.length = 0;
+      this.configurationList[this.currentView]
+          .filter(adserver => {return adserver.SelectedStatus})
+          .forEach(adserver =>{
+            adserver.Visibility = false;
+            this.confirmRemove.push(adserver._id);
+      });
+      
+      var isPlural = this.confirmRemove > 1;
+      this.snackbarMessage = this.confirmRemove.length + ' Ad server' + (isPlural ? 's have' : ' has') + ' been removed';
+      this.showSnackbarDelete = true;
+    },
+    onConfirmRemove(){
+      this.confirmRemove.forEach(id=>{
+        this.configurationList[this.currentView].splice(this.configurationList[this.currentView]
+        .findIndex(element=> {return element._id == id}), 1)
+      });
+      
+
+      this.showSnackbarDelete = false;
+    },
+    onRevertRemove(){
+      this.showSnackbarDelete = false;
+    },
     actionSectionVisivility(visivility){
       this.hasSelectedData = visivility;
-    } 
+    }
   }
 });

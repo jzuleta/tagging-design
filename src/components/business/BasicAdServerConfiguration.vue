@@ -130,7 +130,8 @@ export default {
 
                 this.configurationList[this.currentView].push(Object.assign({
                     _id: uuidv1(),
-                    SelectedStatus:false
+                    SelectedStatus:false,
+                    Visibility: true,
                 },Configuration, this.currentAdserver));
                 
 
