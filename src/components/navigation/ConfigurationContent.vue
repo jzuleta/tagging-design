@@ -5,8 +5,8 @@
 </template>
 <script>
 export default {
-     props: ["windowSize"]
-}
+  props: ["windowSize"]
+};
 </script>
 
 <style scoped>

@@ -3,10 +3,10 @@ export default {
   data() {
     return {
       menuItems: [
-        { name: "Dashboard", icon: "equalizer"},
-        { name: "Macro Tag", icon: "label"},
-        { name: "Hardcoded Tag", icon: "assignment"},
-        { name: "Video Wrapped Tag", icon: "ondemand_video"},
+        { name: "Dashboard", icon: "equalizer" },
+        { name: "Macro Tag", icon: "label" },
+        { name: "Hardcoded Tag", icon: "assignment" },
+        { name: "Video Wrapped Tag", icon: "ondemand_video" }
       ],
       activeItem: "Dashboard"
     };
@@ -39,20 +39,19 @@ export default {
 </div>
 </template>
 <style>
-.menu-content button{
-    width: 100%;
-    margin: 0;
-    height: 46px;
-    padding-left: 18px;
+.menu-content button {
+  width: 100%;
+  margin: 0;
+  height: 46px;
+  padding-left: 18px;
 }
 
-.menu-content button .md-ripple{
-      display: flex;
-    justify-content: start;
+.menu-content button .md-ripple {
+  display: flex;
+  justify-content: start;
 }
 
-.menu-content button.active-item{
-  background-color: #d8d8d8
+.menu-content button.active-item {
+  background-color: #d8d8d8;
 }
-
 </style>

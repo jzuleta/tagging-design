@@ -54,7 +54,7 @@
                 <md-button class="md-raised md-primary" @click="showSnackbar = false">{{snackbarButtonMessage}}</md-button>
         </md-snackbar>
 
-        <md-snackbar :md-position="'center'" :md-active="showSnackbarDelete">
+        <md-snackbar :md-position="'center'" :md-active.sync="showSnackbarDelete" @md-closed="onConfirmRemove()">
           <span class="font-color-white">{{snackbarMessage}}</span>
           <div>
             <md-button class="md-raised md-primary" @click="onConfirmRemove()">Confirm</md-button>

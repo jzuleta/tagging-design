@@ -5,8 +5,8 @@
                 <md-icon>arrow_back</md-icon>
             </md-button>
             <h4 class="font-weight-strong w-100" :class="{'ml-18' : isEditing}">{{currentAdserver.Name}}</h4>
-             <md-button class="md-icon-button ml-auto" v-show="!isEditing" @click="changeAdServerStatus(currentAdserver)">
-                <md-icon v-if="currentAdserver.Favorite">star</md-icon>
+             <md-button class="md-icon-button ml-auto" v-show="!isEditing" @click="changeAdServerStatus(currentAdserver.BaseConfiguration)">
+                <md-icon v-if="currentAdserver.BaseConfiguration.Favorite">star</md-icon>
                 <md-icon v-else>star_border</md-icon>
             </md-button>     
              <md-button class="md-icon-button ml-auto" v-show="isEditing" @click="closeEdition()">

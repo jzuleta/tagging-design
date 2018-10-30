@@ -16,3 +16,9 @@
   position: fixed;
   padding-top: 200px;
 }
+
+.md-empty-state,
+.md-empty-state-container{
+  transition: none !important;
+  will-change: auto !important;
+}

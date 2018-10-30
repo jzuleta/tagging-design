@@ -4,7 +4,23 @@
         <p class="font-color-light pl-18 m-0">
             Default tags automatically create both standard and secure versions of pixel and javascript tags. If additional parameters are required, (i.e. “no block” or “disable flash”) select ‘Edit’
         </p>
-        <div class="px-18">          
+        <div class="px-18">     
+           <md-table v-show="!hasData">
+                <md-table-row>
+                    <md-table-head>                        
+                       <md-checkbox class="mt-4" disabled></md-checkbox>
+                    </md-table-head>
+                    <md-table-head>Ad Server</md-table-head>
+                    <md-table-head>Configuration</md-table-head>
+                    <md-table-head>Media Type</md-table-head>
+                </md-table-row>            
+            </md-table>     
+            <md-empty-state
+              v-show="!hasData"
+              md-icon="add_box"
+              md-label="It has not been added any Ad server">
+              <md-button class="md-primary md-raised">Add Ad Server Configuration</md-button>
+            </md-empty-state>
             <md-table v-show="hasData">
                 <md-table-row>
                     <md-table-head>                        
@@ -36,55 +52,56 @@
 </template>
 <script>
 export default {
-    props: ["windowSize", "configurationList"],
-    data() {
-        return {
-            allSelected: false
-        }
+  props: ["windowSize", "configurationList"],
+  data() {
+    return {
+      allSelected: false
+    };
+  },
+  watch: {
+    allSelectedStatus: function(val) {
+      this.allSelected = val;
     },
-    watch: {
-        allSelectedStatus: function(val) {
-            this.allSelected = val;
-        },
-        someSelectedStatus(newValue, oldValue){                        
-            this.$emit("action-section-visivility", newValue);
-
-        }
-    },
-    methods: {
-        setAdserverConfiguration(adserver) {
-                this.$emit("set-current-adserver-configuration", adserver);
-        },
-        selectAllAction() {
-            this.tagAddedList.forEach(element => {
-                element.SelectedStatus = this.allSelected
-            });
-        }
-    },
-    computed: {
-        allSelectedStatus() {
-            return this.tagAddedList.every(adserver => {
-                return adserver.SelectedStatus && adserver.Visibility;
-            });
-        },
-        someSelectedStatus(){
-            return this.tagAddedList.some(adserver => {
-                return adserver.SelectedStatus && adserver.Visibility;
-            });
-        },
-        tagAddedList: function() {
-            return this.configurationList['macro-tag-content'];
-        },
-        hasData(){
-            return this.tagAddedList.length > 0;
-        }
+    someSelectedStatus(newValue, oldValue) {
+      this.$emit("action-section-visivility", newValue);
     }
+  },
+  methods: {
+    setAdserverConfiguration(adserver) {
+      this.$emit("set-current-adserver-configuration", adserver);
+    },
+    selectAllAction() {
+      this.tagAddedList.forEach(element => {
+        element.SelectedStatus = this.allSelected;
+      });
+    }
+  },
+  computed: {
+    allSelectedStatus() {
+      return this.tagAddedList.every(adserver => {
+        return adserver.SelectedStatus && adserver.Visibility;
+      });
+    },
+    someSelectedStatus() {
+      return this.tagAddedList.some(adserver => {
+        return adserver.SelectedStatus && adserver.Visibility;
+      });
+    },
+    tagAddedList: function() {
+      return this.configurationList["macro-tag-content"];
+    },
+    hasData() {
+      return (
+        this.tagAddedList.filter(adserver => {
+          return adserver.Visibility;
+        }).length > 0
+      );
+    }
+  }
 };
 </script>
-<style> 
- .md-table-head-label{
-     padding-left: 25px
- }
+<style>
+.md-table-head-label {
+  padding-left: 25px;
+}
 </style>
-
-

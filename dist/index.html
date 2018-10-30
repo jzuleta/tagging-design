@@ -36,20 +36,30 @@
             <head-content></head-content>
             <side-menu @change-view="changeView"></side-menu>       
               <action-content 
-              :current-view="currentView"              
+              :has-selected-data="hasSelectedData" 
+              :current-view="currentView"
+              @remove-selected-adservers="removeSelectedAdservers"
               @show-configuration="setConfigurationVisibility">
                 <component 
-                  :is="currentView"                   
-                  :window-size="window"
+                  :is="currentView" 
                   :configuration-list="configurationList" 
                   @action-section-visivility="actionSectionVisivility"
-                  @set-current-adserver-configuration="setCurrentAdserverConfiguration">
+                  @set-current-adserver-configuration="setCurrentAdserverConfiguration"
+                  :window-size="window">
                 </component>
             </action-content>   
         </main-content>
         <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active="showSnackbar" md-persistent>
                 <span class="font-color-white">{{snackbarMessage}}</span>
                 <md-button class="md-raised md-primary" @click="showSnackbar = false">{{snackbarButtonMessage}}</md-button>
+        </md-snackbar>
+
+        <md-snackbar :md-position="'center'" :md-active.sync="showSnackbarDelete" @md-closed="onConfirmRemove()">
+          <span class="font-color-white">{{snackbarMessage}}</span>
+          <div>
+            <md-button class="md-raised md-primary" @click="onConfirmRemove()">Confirm</md-button>
+            <md-button class="md-raised" @click=onRevertRemove()>Undo</md-button>
+          </div>
         </md-snackbar>
       </div>  
   <script type="text/javascript" src="main.js"></script></body>

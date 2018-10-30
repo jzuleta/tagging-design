@@ -18,23 +18,24 @@
     </div>
 </template>
 <script>
-
-export default {   
-      props:["currentView", "hasSelectedData"],
-            methods: {
-            openAdServerSetup: function() {                  
-                  this.$emit("show-configuration", true, 'adserver-content');
-            },
-            removeSelectedAdServers(){                  
-                  this.$emit("remove-selected-adservers");
-            }
-      },
-      computed:{
-            isTagAddition(){
-                  return this.currentView != 'dashboard-content' && this.hasSelectedData == false;
-            }
-      }
-}
+export default {
+  props: ["currentView", "hasSelectedData"],
+  methods: {
+    openAdServerSetup: function() {
+      this.$emit("show-configuration", true, "adserver-content");
+    },
+    removeSelectedAdServers() {
+      this.$emit("remove-selected-adservers");
+    }
+  },
+  computed: {
+    isTagAddition() {
+      return (
+        this.currentView != "dashboard-content" && this.hasSelectedData == false
+      );
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -45,5 +46,4 @@ export default {
 .action-section {
   height: 50px;
 }
-
 </style>
