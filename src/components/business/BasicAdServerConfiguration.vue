@@ -45,10 +45,9 @@ const uuidv1 = require('uuid/v1');
 
 
 export default {
-    props: ["windowSize", "dataType", "currentAdserver" , "currentView", "configurationList"],  
+    props: ["windowSize", "dataType", "dataTypeNames", "currentAdserver" , "currentView", "configurationList"],  
     data() {
         return {
-            dataTypeNames: [],
             selectedConfiguration: [],
             invalidSections: 0          
         };
@@ -69,7 +68,7 @@ export default {
         },       
         readAdServerConfiguration(){              
             (this.isEditing ? this.selectedConfiguration : this.currentAdserver.Configuration).forEach(adServerConfig => {
-                this.dataTypeNames.forEach(name => {
+                this.dataTypeFiltered.forEach(name => {
                     var dataTypeSelection = this.dataType[name].Data.filter(dataValue => {
                         return dataValue.Name == adServerConfig;                        
                     });
@@ -83,37 +82,30 @@ export default {
         },
         readAdServerSelection(){            
             this.selectedConfiguration.length = 0;
-            this.dataTypeNames.forEach(name => {
+            this.dataTypeFiltered.forEach(name => {
                 this.currentAdserver[name].forEach(selection=>{
                       this.selectedConfiguration.push(selection.Name);
                  });                 
              });             
         },
-        backAdServerSelection:function(){
-            this.clearAdServerConfiguration();
+        backAdServerSelection:function(){            
+            this.$emit("reset-adserver-configuration");
             this.$emit("change-configuration-view", "adserver-content");
         },
         closeEdition(){
-            this.clearAdServerConfiguration();
-             this.$emit("configuration-visibility", false); 
+            this.$emit("reset-adserver-configuration");
+            this.$emit("configuration-visibility", false); 
         },
         changeAdServerStatus:function(adServer){
             adServer.Favorite = !adServer.Favorite; 
         },
         validateAdServerConfiguration: function(){
             this.invalidSections = 0;
-             this.dataTypeNames.forEach(name=>{                
+             this.dataTypeFiltered.forEach(name=>{                
                 this.dataType[name].IsValid = 
                 this.dataType[name].Data.some(row =>{ return row.Value});
 
                 this.dataType[name].IsValid ? 0 : this.invalidSections++;
-            });
-        },
-        clearAdServerConfiguration: function(){
-            this.dataTypeNames.forEach(name=>{
-                this.dataType[name].Data.forEach(dataValue =>{
-                    dataValue.Value = false;
-                });
             });
         },
         addAdserverConfiguration: function() {     
@@ -122,7 +114,7 @@ export default {
             if(this.invalidSections == 0){ 
                 var Configuration = new Object();
 
-                this.dataTypeNames.forEach(name => {
+                this.dataTypeFiltered.forEach(name => {
                     Configuration[name] = this.dataType[name].Data.filter((row, index) => {                                                    
                         return row.Value == true
                     });
@@ -135,7 +127,7 @@ export default {
                 },Configuration, this.currentAdserver));
                 
 
-                this.clearAdServerConfiguration();
+                this.$emit("reset-adserver-configuration");
                 this.$emit("configuration-visibility", false);
             }else{                
                  this.$emit("snackbar-visibility", {
@@ -149,22 +141,18 @@ export default {
             }       
         }
     },
-    computed: {     
-        formattedDataType: function() {              
-            this.dataTypeNames =
-                Object.getOwnPropertyNames(this.dataType)
-                .filter(item => {
-                    return item != '__ob__'
-                });            
-            
-            this.dataTypeNames = this.dataTypeNames.filter((name, index)=>{
+    computed: {
+        dataTypeFiltered(){
+            return this.dataTypeNames.filter((name, index)=>{
                 return this.dataType[name].Grid.some(grid=> grid == this.currentView)
-            });            
+            });
+        },
+        formattedDataType: function() {            
 
             this.isEditing ? this.readAdServerSelection() : null;
 
             this.readAdServerConfiguration();
-            return this.dataTypeNames.map(name => {                   
+            return this.dataTypeFiltered.map(name => {                   
                 return {
                     Title: this.dataType[name].Name,
                     Visibility: this.dataType[name].Grid.some(grid=> grid == this.currentView),

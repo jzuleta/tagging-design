@@ -49,6 +49,11 @@ new Vue({
   beforeCreate: function() {
     axios.get("/assets/data/data-type.json").then(response => {
       this.dataType = response.data;
+      this.dataTypeNames =
+                Object.getOwnPropertyNames(this.dataType)
+                .filter(item => {
+                    return item != '__ob__'
+                });   
     });
 
     axios.get("/assets/data/ad-servers.json").then(response => {
@@ -67,6 +72,7 @@ new Vue({
     configurationView: "",
     configurationVisibility: false,
     dataType: [],
+    dataTypeNames: [],
     adserverList: null,
     hasSelectedData: false,
     window: {
@@ -120,6 +126,13 @@ new Vue({
     setCurrentAdserverConfiguration(adServer) {
       this.currentAdServer = adServer;
       this.setConfigurationVisibility(true, "basic-adserver-configuration");
+    },
+    resetAdserverConfiguration: function(){
+      this.dataTypeNames.forEach(name=>{
+          this.dataType[name].Data.forEach(dataValue =>{
+              dataValue.Value = false;
+          });
+      });
     },
     removeSelectedAdservers() {
       this.confirmRemove.length = 0;

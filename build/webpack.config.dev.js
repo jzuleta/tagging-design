@@ -23,7 +23,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -38,7 +39,7 @@ module.exports = {
         loader: 'url-loader'
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2)$/,    
         use: [
           {
             loader: 'file-loader'

@@ -10,6 +10,7 @@
     <div id="app">
         <overlay-content 
               v-show="configurationVisibility"
+              @reset-adserver-configuration="resetAdserverConfiguration"
               @configuration-visibility="setConfigurationVisibility"
               @select-adserver="setCurrentAdServer"
               @change-configuration-view="changeActionView">
@@ -20,11 +21,13 @@
                 :is="configurationView" 
                 :window-size="window" 
                 :data-type="dataType"
+                :data-type-names="dataTypeNames"
                 :adserver-list="adserverList"
                 :current-view="currentView"
                 :current-adserver="currentAdServer"
                 :configuration-list="configurationList"
-                @configuration-visibility="setConfigurationVisibility" 
+                @configuration-visibility="setConfigurationVisibility"
+                @reset-adserver-configuration="resetAdserverConfiguration"
                 @snackbar-visibility="setSnackbarVisibility"
                 @select-adserver="setCurrentAdServer"
                 @change-configuration-view="changeActionView">
