@@ -27,7 +27,7 @@
         </div>
         <div class="d-flex justify-content-end">
            <md-button @click="addAdserverConfiguration()" v-show="!isEditing">Add configuration</md-button>
-           <md-button v-show="isEditing">Confirm changes</md-button>
+           <md-button @click="updateAdserverConfiguration()" v-show="isEditing">Confirm changes</md-button>
         </div>      
     </div>
 </template>
@@ -41,128 +41,178 @@
 }
 </style>
 <script>
-const uuidv1 = require('uuid/v1');
-
+const uuidv1 = require("uuid/v1");
 
 export default {
-    props: ["windowSize", "dataType", "dataTypeNames", "currentAdserver" , "currentView", "configurationList"],  
-    data() {
-        return {
-            selectedConfiguration: [],
-            invalidSections: 0          
-        };
-    },
-    methods: {    
-        splitDataType: function(arr, chunk) {            
-            var index = 0;
-            var arrayLength = arr.length;
-            var tempArray = [];
-            var chunkSize = chunk? chunk : arrayLength > 3 ? arrayLength / 2 : arrayLength;
+  props: [
+    "windowSize",
+    "dataType",
+    "dataTypeNames",
+    "currentAdserver",
+    "currentView",
+    "configurationList"
+  ],
+  data() {
+    return {
+      selectedConfiguration: [],
+      invalidSections: 0
+    };
+  },
+  methods: {
+    splitDataType: function(arr, chunk) {
+      var index = 0;
+      var arrayLength = arr.length;
+      var tempArray = [];
+      var chunkSize = chunk
+        ? chunk
+        : arrayLength > 3
+          ? arrayLength / 2
+          : arrayLength;
 
-            for (index = 0; index < arrayLength; index += chunkSize) {
-                var myChunk = arr.slice(index, index + chunkSize);            
-                tempArray.push(myChunk);
+      for (index = 0; index < arrayLength; index += chunkSize) {
+        var myChunk = arr.slice(index, index + chunkSize);
+        tempArray.push(myChunk);
+      }
+
+      return tempArray;
+    },
+    readAdServerConfiguration() {
+      (this.isEditing
+        ? this.selectedConfiguration
+        : this.currentAdserver.Configuration
+      ).forEach(adServerConfig => {
+        this.dataTypeFiltered.forEach(name => {
+          var dataTypeSelection = this.dataType[name].Data.filter(dataValue => {
+            return dataValue.Name == adServerConfig;
+          });
+
+          if (dataTypeSelection.length > 0) {
+            dataTypeSelection[0].Value = true;
+            return;
+          }
+        });
+      });
+    },
+    readAdServerSelection() {
+      this.selectedConfiguration.length = 0;
+      this.dataTypeFiltered.forEach(name => {
+        this.currentAdserver[name].forEach(selection => {
+          this.selectedConfiguration.push(selection.Name);
+        });
+      });
+    },
+    backAdServerSelection: function() {
+      this.$emit("reset-adserver-configuration");
+      this.$emit("change-configuration-view", "adserver-content");
+    },
+    closeEdition() {
+      this.$emit("reset-adserver-configuration");
+      this.$emit("configuration-visibility", false);
+    },
+    changeAdServerStatus: function(adServer) {
+      adServer.Favorite = !adServer.Favorite;
+    },
+    validateAdServerConfiguration: function() {
+      this.invalidSections = 0;
+      this.dataTypeFiltered.forEach(name => {
+        this.dataType[name].IsValid = this.dataType[name].Data.some(row => {
+          return row.Value;
+        });
+
+        this.dataType[name].IsValid ? 0 : this.invalidSections++;
+      });
+    },
+    updateAdserverConfiguration() {
+      this.validateAdServerConfiguration();
+
+      if (this.invalidSections == 0) {
+        this.dataTypeFiltered.forEach(name => {
+          this.currentAdserver[name] = this.dataType[name].Data.filter(
+            (row, index) => {
+              return row.Value == true;
             }
+          );
+        });
+      } else {
+        this.$emit("snackbar-visibility", {
+          showSnackbar: true,
+          position: "center",
+          duration: 4000,
+          isInfinity: true,
+          snackbarMessage: "You must select at least one element",
+          snackbarButtonMessage: "Got it"
+        });
+      }
 
-            return tempArray;
-        },       
-        readAdServerConfiguration(){              
-            (this.isEditing ? this.selectedConfiguration : this.currentAdserver.Configuration).forEach(adServerConfig => {
-                this.dataTypeFiltered.forEach(name => {
-                    var dataTypeSelection = this.dataType[name].Data.filter(dataValue => {
-                        return dataValue.Name == adServerConfig;                        
-                    });
-                    
-                    if(dataTypeSelection.length > 0){
-                        dataTypeSelection[0].Value = true;
-                        return;
-                    }                        
-                });
-           });
-        },
-        readAdServerSelection(){            
-            this.selectedConfiguration.length = 0;
-            this.dataTypeFiltered.forEach(name => {
-                this.currentAdserver[name].forEach(selection=>{
-                      this.selectedConfiguration.push(selection.Name);
-                 });                 
-             });             
-        },
-        backAdServerSelection:function(){            
-            this.$emit("reset-adserver-configuration");
-            this.$emit("change-configuration-view", "adserver-content");
-        },
-        closeEdition(){
-            this.$emit("reset-adserver-configuration");
-            this.$emit("configuration-visibility", false); 
-        },
-        changeAdServerStatus:function(adServer){
-            adServer.Favorite = !adServer.Favorite; 
-        },
-        validateAdServerConfiguration: function(){
-            this.invalidSections = 0;
-             this.dataTypeFiltered.forEach(name=>{                
-                this.dataType[name].IsValid = 
-                this.dataType[name].Data.some(row =>{ return row.Value});
-
-                this.dataType[name].IsValid ? 0 : this.invalidSections++;
-            });
-        },
-        addAdserverConfiguration: function() {     
-            this.validateAdServerConfiguration();
-
-            if(this.invalidSections == 0){ 
-                var Configuration = new Object();
-
-                this.dataTypeFiltered.forEach(name => {
-                    Configuration[name] = this.dataType[name].Data.filter((row, index) => {                                                    
-                        return row.Value == true
-                    });
-                });   
-
-                this.configurationList[this.currentView].push(Object.assign({
-                    _id: uuidv1(),
-                    SelectedStatus:false,
-                    Visibility: true,
-                },Configuration, this.currentAdserver));
-                
-
-                this.$emit("reset-adserver-configuration");
-                this.$emit("configuration-visibility", false);
-            }else{                
-                 this.$emit("snackbar-visibility", {
-                    showSnackbar: true,
-                    position: 'center',
-                    duration: 4000,
-                    isInfinity: true,
-                    snackbarMessage: 'You must select at least one element',
-                    snackbarButtonMessage: 'Got it'
-                 });
-            }       
-        }
+       this.$emit("reset-adserver-configuration");
+        this.$emit("configuration-visibility", false);
     },
-    computed: {
-        dataTypeFiltered(){
-            return this.dataTypeNames.filter((name, index)=>{
-                return this.dataType[name].Grid.some(grid=> grid == this.currentView)
-            });
-        },
-        formattedDataType: function() {            
+    addAdserverConfiguration: function() {
+      this.validateAdServerConfiguration();
 
-            this.isEditing ? this.readAdServerSelection() : null;
+      if (this.invalidSections == 0) {
+        var Configuration = new Object();
 
-            this.readAdServerConfiguration();
-            return this.dataTypeFiltered.map(name => {                   
-                return {
-                    Title: this.dataType[name].Name,
-                    Visibility: this.dataType[name].Grid.some(grid=> grid == this.currentView),
-                    Data: this.splitDataType(this.dataType[name].Data, this.dataType[name].Chunk)
-                };
-            });            
-        },
-        isEditing(){
-            return this.currentAdserver.hasOwnProperty('_id');
-        }
+        this.dataTypeFiltered.forEach(name => {
+          Configuration[name] = this.dataType[name].Data.filter(
+            (row, index) => {
+              return row.Value == true;
+            }
+          );
+        });
+
+        this.configurationList[this.currentView].push(
+          Object.assign(
+            {
+              _id: uuidv1(),
+              SelectedStatus: false,
+              Visibility: true
+            },
+            Configuration,
+            this.currentAdserver
+          )
+        );
+
+        this.$emit("reset-adserver-configuration");
+        this.$emit("configuration-visibility", false);
+      } else {
+        this.$emit("snackbar-visibility", {
+          showSnackbar: true,
+          position: "center",
+          duration: 4000,
+          isInfinity: true,
+          snackbarMessage: "You must select at least one element",
+          snackbarButtonMessage: "Got it"
+        });
+      }
     }
+  },
+  computed: {
+    dataTypeFiltered() {
+      return this.dataTypeNames.filter((name, index) => {
+        return this.dataType[name].Grid.some(grid => grid == this.currentView);
+      });
+    },
+    formattedDataType: function() {
+      this.isEditing ? this.readAdServerSelection() : null;
+
+      this.readAdServerConfiguration();
+      return this.dataTypeFiltered.map(name => {
+        return {
+          Title: this.dataType[name].Name,
+          Visibility: this.dataType[name].Grid.some(
+            grid => grid == this.currentView
+          ),
+          Data: this.splitDataType(
+            this.dataType[name].Data,
+            this.dataType[name].Chunk
+          )
+        };
+      });
+    },
+    isEditing() {
+      return this.currentAdserver.hasOwnProperty("_id");
+    }
+  }
 };
 </script>

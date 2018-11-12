@@ -5,8 +5,8 @@
 export default {
   methods: {
     hideOverlay: function() {
-      this.$emit("reset-adserver-configuration");
       this.$emit("select-adserver", {});
+      this.$emit("reset-adserver-configuration");      
       this.$emit("configuration-visibility", false);
       this.$emit("change-configuration-view", "adserver-content");
     }
