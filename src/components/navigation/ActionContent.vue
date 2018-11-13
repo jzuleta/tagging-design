@@ -1,6 +1,6 @@
 <template>
-    <div class="col-10 p-0 pr-24 action-content">
-        <div class="d-flex justify-content-end">
+    <div class="col-10 p-0 pr-24 action-content">      
+        <div class="d-flex justify-content-end">                  
             <md-button class="mdc-button" v-show="hasSelectedData">                              
                   File Management
             </md-button>
@@ -12,8 +12,8 @@
             </md-button>
             <md-button class="mdc-button" v-show="isTagAddition">                               
                   Submit Request
-            </md-button>
-        </div>
+            </md-button>          
+        </div>         
         <slot></slot>
     </div>
 </template>

@@ -1,9 +1,16 @@
 <template>
     <div class="bg-white element-shadow px-8 py-8" :style="'height:' + (windowSize.height - windowSize.tagContentReference) + 'px'">
-        <h4 class="font-weight-light pb-8 pt-18 pl-18 m-0">Ad Server Macro Tags</h4>
-        <p class="font-color-light pl-18 m-0">
-            Default tags automatically create both standard and secure versions of pixel and javascript tags. If additional parameters are required, (i.e. “no block” or “disable flash”) select ‘Edit’
-        </p>
+      <div class="d-flex justify-content-between">
+        <h4 class="font-weight-light pb-8 pt-18 pl-18 m-0">Ad Server Macro Tags</h4>        
+        <div class="pr-18">
+        <md-button class="md-icon-button m-0" @click="expanded = false">
+            <md-icon>view_headline</md-icon>
+        </md-button>
+         <md-button class="md-icon-button m-0" @click="expanded = true">
+            <md-icon>view_stream</md-icon>
+        </md-button>
+        </div>
+      </div>        
         <div class="px-18">     
            <md-table v-show="!hasData">
                 <md-table-row>
@@ -17,9 +24,8 @@
             </md-table>     
             <md-empty-state
               v-show="!hasData"
-              md-icon="add_box"
               md-label="It has not been added any Ad server">
-              <md-button class="md-primary md-raised">Add Ad Server Configuration</md-button>
+              <md-button class="md-primary md-raised" @click="openAdServerSetup">Add Ad Server Configuration</md-button>
             </md-empty-state>
             <md-table v-show="hasData">
                 <md-table-row>
@@ -36,14 +42,24 @@
                     </md-table-cell>
                     <md-table-cell>{{ adserver.Name }}</md-table-cell>
                     <md-table-cell>
-                        <div v-for="preference in adserver.Preferences" :key="preference.id">
+                      <ul class="list-unstyled p-0" v-if="expanded">
+                        <li v-for="preference in adserver.Preferences" :key="preference.id">
                             {{preference.Name}}
-                        </div>
+                        </li>
+                      </ul>
+                      <div v-else>
+
+                      </div>
                     </md-table-cell>
                     <md-table-cell>
-                        <div v-for="mediaTypes in adserver.MediaTypes" :key="mediaTypes.id">
+                      <ul class="list-unstyled p-0" v-if="expanded">
+                        <li v-for="mediaTypes in adserver.MediaTypes" :key="mediaTypes.id">
                             {{mediaTypes.Name}}
-                        </div>
+                        </li>
+                      </ul>
+                       <div v-else>
+
+                      </div>
                     </md-table-cell>
                 </md-table-row>
             </md-table>
@@ -55,7 +71,8 @@ export default {
   props: ["windowSize", "configurationList"],
   data() {
     return {
-      allSelected: false
+      allSelected: false,
+      expanded: true
     };
   },
   watch: {
@@ -67,6 +84,9 @@ export default {
     }
   },
   methods: {
+    openAdServerSetup: function() {
+      this.$emit("show-configuration", true, "adserver-content");
+    },
     setAdserverConfiguration(adserver) {
       this.$emit("set-current-adserver-configuration", adserver);
     },

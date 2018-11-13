@@ -21,7 +21,7 @@ h4{  font-size: 20px;}
 .w-100{ width: 100% !important;}
 .w-50{ width: 50%;}
 
-.p-0{ padding: 0}
+.p-0{ padding: 0 !important}
 
 .pt-8{padding-top: 8px}
 .pt-18{padding-top: 18px}
@@ -29,7 +29,7 @@ h4{  font-size: 20px;}
 
 .pr-8{padding-right: 8px}
 .pr-18{padding-right: 18px}
-.pr-24{padding-right: 24px}
+.pr-24{padding-right: 24px !important}
 
 .pb-8{padding-bottom: 8px}
 .pb-18{padding-bottom: 18px}
@@ -47,7 +47,7 @@ h4{  font-size: 20px;}
 .py-18{padding-top: 18px; padding-bottom: 18px;}
 .py-24{padding-top: 24px; padding-bottom: 24px;}
 
-.m-0{margin: -1px 0px}
+.m-0{margin: -1px 0px !important}
 
 .mt-auto{margin-top: auto;}
 .mt-4{margin-top: 4px !important}
@@ -128,3 +128,6 @@ th{
     border-bottom: thin solid #E0E0E0;
 }
 
+.list-unstyled{
+    list-style: none;
+}
